@@ -1,0 +1,93 @@
+﻿@using TouristGuide.UI.Models
+@model LoginViewModel
+@{
+    ViewBag.Title = "Sign In";
+}
+@Styles.Render("~/Content/Site.css")
+
+<h2 align="center">Please sign in</h2>
+<h4 align="center">@ViewBag.message</h4>
+
+@using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+    <hr />
+    <div class="row marg bord">
+        <div class="row marg bord">
+            <div class="col-xs-6 com-md-0-my bord">
+            </div>
+            <div class="col-xs-6 com-md-2-my bord">
+            </div>
+            <div class="col-xs-6 com-md-4-my bord">
+                @Html.ValidationSummary(true, "", new { @class = "text-danger", align = "center", style = " color #1E90FF;" })
+            </div>
+            <div class="col-xs-6 com-md-1-my bord">
+            </div>
+        </div>
+    </div>
+    <div class="reg ">
+        <div class="row marg ">
+            <div class="col-xs-6 com-md-0-my bord">
+            </div>
+            <div class="col-xs-6 com-md-2-my bord">
+                @Html.LabelFor(m => m.Email, new { @class = "control-label marg", align = "right" })
+            </div>
+            <div class="col-xs-6 com-md-4-my bord">
+                @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+            </div>
+            <div class="col-xs-6 com-md-1-my bord">
+                @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="row marg ">
+            <div class="col-xs-6 com-md-0-my bord">
+            </div>
+            <div class="col-xs-6 com-md-2-my bord">
+                @Html.LabelFor(m => m.Password, new { @class = " control-label marg" })
+            </div>
+            <div class="col-xs-6 com-md-4-my bord">
+                @Html.PasswordFor(m => m.Password, new { @class = "form-control", id = "Password" })
+            </div>
+            <div class="col-xs-6 com-md-1-my bord">
+                @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="row marg ">
+            <div class="col-xs-6 com-md-0-my bord">
+            </div>
+            <div class="col-xs-6 com-md-3-my bord "></div>
+            <div class="col-xs-6 com-md-4-my  bord">
+                <input type="submit" class="btn btn-lg-my btn-info btn-block" value="Sign in" align="center" name="submit" />
+            </div>
+        </div>
+        <div class="row marg ">
+            <div class="col-xs-6 com-md-0-my bord">
+            </div>
+            <div class="col-xs-6 com-md-3-my bord "></div>
+            <div class="col-xs-6 com-md-4-my  bord">
+                @Html.ActionLink("Forgot Password?", "ForgotPassword", "Account")
+            </div>
+        </div>
+
+    </div>
+}
+<div style="margin: 0 auto">
+    <div style="width: 200px; margin:auto">
+        <section id="socialLoginForm">
+            @Html.Partial("_ExternalLoginsListPartial", new ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })
+        </section>
+    </div>
+</div>
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+}
+
+
+
+

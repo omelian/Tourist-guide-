@@ -1,0 +1,30 @@
+﻿<md-dialog aria-label="ReservationWarning" ng-cloak class="reservation">
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <h4>Warning</h4>
+            <span flex></span>
+            <md-button class="md-icon-button" ng-click="cancel()">
+                <span class="glyphicon glyphicon-remove" aria-hidden="true" aria-label="Close dialog">
+            </md-button>
+        </div>
+    </md-toolbar>
+
+    <md-dialog-content class="md-dialog-content">
+        <md-list flex>
+        <h5>You already have reservations</h5>
+        <md-list-item class="md-3-line" ng-repeat="reservation in reservations" ng-click="showReservation(reservation)">
+          <div class="md-list-item-text" layout="column">
+            <h3>{{ reservation.ProfileName }}</h3>
+            <h4>{{ reservation.ReservationDate }}</h4>
+            
+          </div>
+        </md-list-item>
+            <md-button class="md-raised md-primary" type="submit" id="butRes-delete"  ng-click="addReservation()">Add Reservation</md-button>
+            <md-button class="md-raised md-primary" type="submit" id="butRes-ok" ng-click="cancel()">Cancel</md-button>
+        </form>
+    </md-dialog-content>
+
+
+</md-dialog>
+
+<link href="../../../../Content/reserv.css" rel="stylesheet" />

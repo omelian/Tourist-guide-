@@ -1,0 +1,20 @@
+﻿
+<div class="container-fluid" style="text-align: center;">
+    <ul class="nav nav-pills nav-justified profile-type-list"style="display: inline-block;">
+        <li role="presentation"><a href="#/list">Restaurants</a></li>
+        <li role="presentation"><a href="#">Museums</a></li>
+        <li role="presentation"><a href="#">Active Rest </a></li>
+    </ul>
+</div>
+<div ng-controller="MapController" >
+    <!--<ng-map set-height center="[50.450199, 30.527283]" id="map-main"></ng-map> NOT STATIC SIZE-->
+    <ng-map center="[50.450199, 30.527283]" id="map-main" style ="height:700px">
+        <marker ng-repeat="mark in Coords" position="{{mark.lantitude}},{{mark.longtitude}}"></marker>
+    </ng-map>
+</div> 
+
+
+
+
+
+

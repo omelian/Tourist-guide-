@@ -1,0 +1,30 @@
+﻿
+<md-dialog class="confirm-popup-size ">
+
+
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+
+            <h2>{{Title}}</h2>
+            <span flex></span>
+            <md-button class="md-icon-button" ng-click="cancel()">
+                <md-icon md-svg-src="/Content/close_pic.svg" aria-label="Close dialog"></md-icon>
+            </md-button>
+        </div>
+
+    </md-toolbar>
+
+    <md-dialog-content>
+        <h3 class="news-popup-content-margin news-popup-content-padding"><a href="/Account/Login" style=" text-decoration: none; color:black">{{Message}}</a></h3>
+
+        <div class="confirm-buttons-box">
+
+            <a href="/Account/Login?returnUrl={{url}}" type="button" class="btn btn-primary confirm-buttons-style">Sign in</a>
+            <a href="/Account/Register?returnUrl={{url}}" type="button" class="btn btn-info confirm-buttons-style">Register</a>
+            
+        </div>
+    </md-dialog-content>
+
+</md-dialog>
+
+

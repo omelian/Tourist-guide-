@@ -1,0 +1,70 @@
+﻿
+
+<div ng-controller="CommentsController" class="content-top-align">
+
+
+    <div ng-hide="checkedComments()">
+
+        <form ng-submit="AddComment(comment)">
+            <textarea class="form-control controls-top-align" required  name="text" rows="5" placeholder="Text" ng-model="comment.Text"></textarea>
+            <button class="btn btn-default controls-top-align" type="submit">Add</button>
+        </form>
+
+
+    </div>
+
+
+
+    <div ng-controller="NewsController" class="content-top-align">
+
+
+   
+
+            <div class="panel-group" dir-paginate="comment in restaurantComments | itemsPerPage: 6">
+
+                <div class="panel panel-primary  controls-top-align">
+                    <div class="panel-heading">
+                        <h4 class="panel-title pull-right">
+                            {{comment.DateTime}}
+                        </h4>
+                        <div class="panel-title">{{comment.User}}</div>
+
+               
+                    </div>
+
+
+
+                    <div ng-if="!CheckOverflowLengthOfContent(comment.Text)">
+                        <div ng-style="heightOfContent" ng-click=" CheckHeight(this) ? heightOfContent = { 'height': 'auto' } : heightOfContent = { 'height': '80px' }" class="panel-body center-block hideOverflow newsContainer">
+                            <button disabled class="glyphicon glyphicon-hand-down pull-right"></button>
+                            {{comment.Text}}
+
+                        </div>
+                    </div>
+                    <div ng-if="CheckOverflowLengthOfContent(comment.Text)" class="panel-body center-block hideOverflow newsContainer">
+                        {{comment.Text}}
+                    </div>
+
+
+
+                </div>
+
+    </div>
+
+        
+        <dir-pagination-controls> </dir-pagination-controls>
+
+
+
+
+
+
+
+
+
+
+
+
+    
+</div>
+</div>

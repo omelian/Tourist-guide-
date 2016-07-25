@@ -1,0 +1,89 @@
+body {
+  background-color: #ffffff;
+}
+
+.form-signin {
+ /*max-width: 500px;
+  padding: 15px;*/
+  margin: 15px;
+}
+.form-signin .form-signin-heading,
+.form-signin .checkbox {
+  margin-bottom: 10px;
+  text-align: center;
+}
+.form-signin .checkbox {
+  font-weight: normal;
+}
+.form-signin .form-control {
+  position: relative;
+  height: auto;
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+  padding: 10px;
+  margin: 5px;
+  font-size: 16px;
+}
+.form-signin .form-control:focus {
+  z-index: 2;
+}
+.form-signin input[type="email"] {
+  margin-bottom: -1px;
+  border-radius: 4px;
+
+}
+.form-signin input[type="password"] {
+  margin-bottom: 10px;
+  border-radius: 4px;
+}
+.marg {
+ margin: 5px;
+}
+
+.marg15 {
+ margin: 25px;
+}
+/*for favorites*/
+.mydiv
+{
+	height: 130px;
+	width: 300px;
+	display: inline-block;
+	overflow: hidden;
+	margin: 4px;
+    border: 1px solid #000;
+}
+
+.myimage
+{
+ height: 130px;
+ width: 160px;
+ overflow: left;
+ border-radius: 5px;
+ max-height: 276px;
+}
+.mytext
+{
+	position: relative;
+	right: 10px;
+	top: -2px;
+	width: 150px;
+    overflow: left;
+    border-radius: 5px;
+}
+.mybutton
+{
+position: relative;
+overflow: left;
+right: -140px;
+top:7px;
+background-color: transparent !important;
+}
+
+.icon-photo-button-style { 
+background-color:transparent; 
+color:white; 
+border:0; 
+text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black; 
+}

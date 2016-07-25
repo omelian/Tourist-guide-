@@ -1,0 +1,376 @@
+﻿@model TouristGuide.INF.DataTransferObject.UserManageModel
+@using TouristGuide.INF.Enums
+@using TouristGuide.INF.Models
+@{
+    ViewBag.Title = "Manage";
+}
+
+
+<script type="text/javascript">
+
+    function go() {
+        var formData = new FormData();
+        var file = document.getElementById("FileUpload").files[0];
+        if (file != null) {
+            var image = document.getElementById("PhotoUrl");
+            image.src = "https://spotlightbusinessbranding.com/wp-content/plugins/use-your-drive/css/clouds/cloud_upload_256.gif";
+            formData.append("FileUpload", file);
+            var MyAppUrlSettings = {
+                MyUsefulUrl: '@Url.Action("UploadHomeReport", "Manage")'
+            }
+
+            $.ajax({
+                url: MyAppUrlSettings.MyUsefulUrl,
+                type: "POST",
+                contentType: false,
+                processData: false,
+                data: formData,
+                success: function (data) {
+                    var image2 = document.getElementById("PhotoUrl");
+                    image2.src = data.responseText;
+                },
+                error: function (response) {
+
+                    var image3 = document.getElementById("PhotoUrl");
+                    image3.src = "https://upload.wikimedia.org/wikipedia/commons/thumb/9/97/Dialog-error-round.svg/2000px-Dialog-error-round.svg.png";
+                }
+            });
+        }
+    }
+
+</script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+
+<script src="~/Scripts/ScriptsForUser.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+
+@Styles.Render("~/Content/Site.css")
+@Styles.Render("~/Content/bootstrap.css")
+@Styles.Render("~/Content/login.css")
+
+<link href="~/Content/bootstrap.css" rel="stylesheet" />
+<link href="~/Content/style.css" rel="stylesheet" />
+
+<div class="myrow  bord">
+    <div class="mycol col marg bord">
+        @using (Html.BeginForm("Index", "Manage", FormMethod.Post, new { @class = "form-horizontal", role = "form", name = "myForm" }))
+        {
+                        <dl>
+
+                <dt></dt>
+                <dd>
+                    <p> <img src=" @Model.PhotoUrl " alt="Photo" class="ava" id="PhotoUrl" /></p>
+                    <input id="FileUpload" type="file" name="files[]" onchange="go()" class=" custom-file-input" style="margin: 2px">
+                </dd>
+                <dt><p class="col-md-7 control-label marg"></p></dt>
+
+                    <dt>@Html.LabelFor(model => model.UserName, new { @class = "col-md-8  bord2" })</dt>
+                    <dd>
+                        @Html.TextBoxFor(model => model.UserName, new { @class = "form-control", name = "Username" })
+                    </dd>
+
+                    <dt>@Html.LabelFor(model => model.LastName, new { @class = "col-md-8  bord2" })</dt>
+                    <dd>
+                        @Html.TextBoxFor(model => model.LastName, new { @class = "form-control", name = "Lastname" })
+                    </dd>
+
+                    <dt>@Html.LabelFor(model => model.Gender, new { @class = "col-md-8 bord2" })</dt>
+                    <dd>
+                        @{
+                            var selectList = Enum.GetValues(typeof(GenderEnum))
+                                                 .Cast<GenderEnum>()
+                                                 .Select(e => new SelectListItem
+                                                 {
+                                                     Value = ((int)e).ToString(),
+                                                     Text = e.ToString()
+                                                 });
+                        }
+                        @Html.DropDownListFor(model => model.Gender, selectList, new { @class = "form-control", style = " font-color #3eff34; ", id = "Roles", name = "IdRole" })
+                    </dd>
+
+                    <dt>@Html.LabelFor(model => model.DateBirth, new { @class = "col-md-8  bord2" })</dt>
+                    <dd>
+                        <input class="form-control" format="dd/mm/yyyy" data-val="true" data-val-date="The field DateBirth must be a date." data-val-required="The DateBirth field is required." id="Data_DateBirth" name="DateBirth" type="date" placeholder="yyyy-mm-dd" min="1930-01-01" max="@ViewBag.enddate" value="@ViewBag.curday" title="Birthday of user">
+                    </dd>
+                    <dt><p class="col-md-7 control-label marg"></p></dt>
+                    <dd class="marg">
+                        <div class="col-md-12">
+                            <input type="submit" class="btn btn-info btn-block btn-lg-my" value="Save" align="center" name="submit" style="margin: auto;" />
+                        </div>
+                    </dd>
+
+                            <label class="col-md-8  bord2">
+                                @Html.ActionLink("Reset passwrord", "ResetPassword")
+                            </label>
+            
+            </dl>
+
+
+
+                        }
+
+
+    </div>
+
+   
+
+    <div class="usercol marg bord">
+      @if (ViewBag.UserType == UserRoleEnum.User)
+      {   <ul class="nav nav-pills nav-justified profile-type-list ng-scope">
+            <li class="active"><a data-toggle="tab" href="#home">Favorites</a></li>
+            <li><a data-toggle="tab" href="#menu1">Comments</a></li>
+            <li><a data-toggle="tab" href="#menu2">Reservations</a></li>
+             
+        </ul>
+
+        <div class="tab-content hei bord">
+
+            <div id="home" class="tab-pane fade in active usertabfavorites bord" ng-controller="manageController">
+                <div class="content-top-align">
+                    <ul class="list-unstyled heiul bord">
+                        <li dir-paginate="favorite in userFavorites  |  orderBy:['favorite.ProfileId'] : true | itemsPerPage: 6 ">
+
+
+                            <div class="list-top bordradius fav bord marg" style="float:left;" id="{{favorite.ProfileId}}+containerr">
+
+                                <div class="hovereffect-my thumbnail">
+                                    <div class="carousel-caption">
+                                    </div>
+                                    <a href="/#/{{favorite.Type}}/{{favorite.ProfileId}}/news">
+                                        <img src="{{favorite.MainPhoto}}" class="img-responsive" style="width:100%;height:200px;" />
+                                    </a>
+                                    <div class="overlay">
+                                        <a href="/#/{{favorite.Type}}/{{favorite.ProfileId}}/news" class=" mytext" style=" color #FFF">{{favorite.Name}}</a>
+                                        <button type="button" ng-click="deleteFavorite(favorite.ProfileId)" class="glyphicon glyphicon-trash pull-right road-to-icon trashbtn ">
+                                            <md-tooltip md-direction="top">
+                                                Click to delete from favorite
+                                            </md-tooltip>
+                                        </button>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </li>
+                        
+                    </ul>
+
+
+                </div>
+                <div style="clear: both;"></div>
+                 <dir-pagination-controls ng-show="userFavorites.length>6"></dir-pagination-controls>
+            </div>
+
+
+
+
+            <div id="menu1" class="tab-pane fade usertabcomments bord hei" ng-controller="CommentsController">
+
+                <div  class="content-top-align">
+                    <ul class="list-unstyled heiul bord">
+                        <li dir-paginate="comment in userComments  |  orderBy:['comment.DateTime'] : true | itemsPerPage: 4 ">
+                            <div class="panel panel-primary content-top-align content-block-style content-title-style">
+                                <div>
+                                    <h4>
+                                        <span class="content-title-text-style">
+                                            You commented about <a href="/#/{{comment.Type}}/{{comment.ProfileId}}/news">{{comment.ProfileName}}</a>:
+                                        </span>
+                                        
+                                    </h4>
+                                </div>
+                                <div class="div-wrapper-container">
+                                    <span class="horizontal-line"></span>
+                                    <div id="{{comment.CommentId}}" class="panel-body center-block hideOverflow commentContainer ">
+                                        <div ng-hide="comment.UserPhotoUrl == undefined">
+                                            <img class="img-circle comment-image" ng-src="{{comment.UserPhotoUrl}}">
+                                        </div>
+                                        <div>
+                                            {{comment.Text}}
+                                        </div>
+                                    </div>
+                                    <span class="horizontal-line"></span>
+                                    <div class="div-wrapper-left text-primary">Commented on: {{comment.DateTime}}</div>
+
+                                    <div ng-show="!CheckOverflowLengthOfContent(comment.CommentId)">
+
+                                        <a id="{{comment.CommentId}}hint" href="" ng-click="CheckHeight(comment.CommentId)" class=" div-wrapper-right">Show more...</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                      
+                    </ul>
+                </div>
+                <div style="clear: both;"></div>
+                <dir-pagination-controls ng-show="userComments.length>4"></dir-pagination-controls>
+            </div>
+
+
+            <div id="menu2" class="tab-pane fade usertab bord" ng-controller="manageController">
+                <ul class="list-unstyled heiul bord">
+                    <li dir-paginate="reservation in userReservations  |  orderBy:['reservation.ReservationDate'] : true | itemsPerPage: 4 ">
+
+
+                        <div class="list-top bordradius boooo" style="float:left;" id="{{reservation.ReservationId}}+containerr">
+
+                                <p><a href="/#/{{reservation.Type}}/{{reservation.ProfileId}}/news">{{reservation.ProfileName}}</a></p>
+                            <a href="/#/{{reservation.Type}}/{{reservation.ProfileId}}/news">
+                                <img src="{{reservation.MainPhoto}}" class="imgreservation" />
+                            </a>
+                                <p>
+                                    Time: {{reservation.ReservationDate}}
+                                </p>
+                                <p>
+                                    Amount of persons: {{reservation.NumberOfPersons}}
+                                </p>
+                        </div>
+
+                    </li>
+                    
+                </ul>
+                 <div style="clear: both;"></div>
+                <dir-pagination-controls ng-show="userReservations.length>4"></dir-pagination-controls>
+            </div>
+
+            
+        </div>
+      }
+      else
+      if (ViewBag.UserType == UserRoleEnum.Admin)
+      {<div ng-controller="manageController">
+            <ul class="list-unstyled heiul ">
+                <li dir-paginate="rest in adminProfiles  |  orderBy:['profile.ReservationDate'] : true | itemsPerPage: 8 ">
+                    <div class="profile-listitem ">
+
+                        <a href="/#/{{rest.Type}}/{{rest.ProfileId}}/moderators" ng-click="setModelNull();">
+                            <h3 style="height:22px;max-height:25px;overflow:hidden;margin: 2px; text-align: center;">{{rest.Name}}</h3>
+                        </a>
+                        <h4 style="max-height:25px;height:20px;overflow:hidden; text-align: center;" class="text-muted">{{rest.Address}}</h4>
+
+                        <a href="/#/{{rest.Type}}/{{rest.ProfileId}}/moderators" ng-click="setModelNull();">
+                            <img class="img img-rounded profile-list-photo-container adminprofileimg" ng-src="{{rest.MainPhoto}}" />
+                        </a>
+
+                        <div id="infobox{{rest.ProfileId}}" style="height:20px;max-height:20px;"></div>
+
+                    </div></li>
+                
+            </ul>
+        <div style="clear: both;"></div>
+<dir-pagination-controls ng-show="adminProfiles.length>8"></dir-pagination-controls>
+        </div>
+      }
+      else
+          if (ViewBag.UserType == UserRoleEnum.Moderator)
+          {
+            <h5> You are moderator in <a href="/#/{{Moder.Type}}/{{Moder.ProfileId}}/news" ng-controller="manageController">{{Moder.ProfileName}}</a></h5>
+
+    <ul class="nav nav-pills nav-justified profile-type-list ng-scope">
+        <li class="active"><a data-toggle="tab" href="#home">Reservations</a></li>
+        <li><a data-toggle="tab" href="#menu1">Comments</a></li>
+
+    </ul>
+
+        <div class="tab-content hei bord">
+
+            <div id="home" class="tab-pane fade in active usertab bord" ng-controller="manageController">
+
+                <ul class="list-unstyled heiul bord">
+                    <li dir-paginate="reservation in profileReservations  |  orderBy:['reservation.ReservationDate'] : true | itemsPerPage: 4 ">
+
+
+                        <div class="list-top bordradius moderreservation" style="float:left;" id="{{reservation.ReservationId}}+containerr">
+
+                            <div class="reservationinfo">
+                                <p class="ng-binding"><a href="/#/{{reservation.Type}}/{{reservation.ProfileId}}/news">{{reservation.ProfileName}}</a></p>
+                                <p>
+                                    User: {{reservation.UserName}}
+                                </p>
+                                <p>
+                                    Time: {{reservation.ReservationDate}}
+                                </p>
+                                <p>
+                                    Amount of persons: {{reservation.NumberOfPersons}}
+                                </p>
+
+                            </div>
+                            <div class="reservationmenu">
+                                <div>
+                                    <div class="reservationitem" ng-repeat="meal in reservation.Meals">
+                                        <img src="{{meal.MenuItemURL}}" class="reservationitemimage" />
+                                        <p>{{meal.MenuItemName}}</p>
+                                        <p>Кількість: {{meal.Count}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </li>
+                   
+                </ul>
+                <div style="clear: both;"></div>
+                <dir-pagination-controls ng-show="userReservations.length>4"></dir-pagination-controls>
+            </div>
+
+
+
+
+
+            <div id="menu1" class="tab-pane fade usertabcomments bord hei">
+
+                <div ng-controller="CommentsController" class="content-top-align">
+                    <ul class="list-unstyled heiul bord">
+                        <li dir-paginate="comment in profileComments    |  orderBy:['comment.DateTime'] : true | itemsPerPage: 4 ">
+                            <div class="panel panel-primary content-top-align content-block-style content-title-style">
+                                <div>
+                                    <h4>
+                                        <span class="content-title-text-style">
+                                            {{comment.User}} commented about <a href="/#/{{comment.Type}}/{{comment.ProfileId}}/news">{{comment.ProfileName}}</a>:
+                                        </span>
+                                        <button ng-show="timeOutInManagePage(comment)" ng-click="timeOutInManagePage(comment) ? deleteCommentInManagePage(comment) : skip" class="glyphicon glyphicon-remove  pull-right icon-button-style">
+                                            <md-tooltip md-direction="top">
+                                                Click to delete your comment
+                                            </md-tooltip>
+                                        </button>
+                                        <button ng-show="timeOutInManagePage(comment)" ng-click="timeOutInManagePage(comment) ? editCommentInManagePage($event,comment,comment.ProfileId) : skip" class="glyphicon glyphicon-pencil pull-right icon-button-style">
+                                            <md-tooltip md-direction="top">
+                                                Click to edit your comment
+                                            </md-tooltip>
+                                        </button>
+                                    </h4>
+                                </div>
+                                <div class="div-wrapper-container">
+                                    <span class="horizontal-line"></span>
+                                    <div id="{{comment.CommentId}}" class="panel-body center-block hideOverflow commentContainer ">
+                                        <div ng-hide="comment.UserPhotoUrl == undefined">
+                                            <img class="img-circle comment-image" ng-src="{{comment.UserPhotoUrl}}">
+                                        </div>
+                                        <div>
+                                            {{comment.Text}}
+                                        </div>
+                                    </div>
+                                    <span class="horizontal-line"></span>
+                                    <div class="div-wrapper-left text-primary">Commented on: {{comment.CommentDateTime}}</div>
+
+                                    <div ng-show="!CheckOverflowLengthOfContent(comment.CommentId)">
+
+                                        <a id="{{comment.CommentId}}hint" href="" ng-click="CheckHeight(comment.CommentId)" class=" div-wrapper-right">Show more...</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        
+                    </ul>
+                    <div style="clear: both;"></div>
+                    <dir-pagination-controls ng-show="profileComments.length>4"></dir-pagination-controls>
+                </div>
+
+            </div>
+
+        </div>
+          }
+</div>
+</div>
+   
+
+

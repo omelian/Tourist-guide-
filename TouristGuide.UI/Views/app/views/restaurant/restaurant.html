@@ -1,0 +1,55 @@
+﻿<div class="container-fluid" ng-controller="RestaurantPageController">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="container-fluid" id="columns">
+                <a href="#/restaurant/{{restaurantId}}" class="navbar-brand">{{restaurant.Name}}({{restaurant.City}},{{restaurant.Street}},{{restaurant.Number}})</a>
+            </div>
+            {{currentUser.Role}}
+            <div class="container-fluid" id="columns">
+                <div ng-controller="RatingDemoCtrl">
+                    <uib-rating ng-model="rate" ng-click="addToFavorits()" max="max" read-only="isReadonly" on-hover="hoveringOver(value)" on-leave="overStar = null" titles="['one','two','three']" aria-labelledby="default-rating" >
+                    </uib-rating>
+                    <span class="label" ng-class="{'label-warning': percent<30, 'label-info': percent>=30 && percent<70, 'label-success': percent>=70}" ng-show="overStar && !isReadonly">{{percent}}%</span>
+                    
+                </div>
+                <button type="button" class="btn btn-default btn-lg" ng-click="addToFavorits()">
+                <span class="glyphicon glyphicon-heart" aria-hidden="true"></span> Add to favorite
+                </button> 
+
+            </div>
+            <modal-dialog show='modalShown' width='50%' height='65%'>
+               <div class="jumbotron">
+                  <h1>For this functionality you must register!</h1>
+                  
+                  <p><a class="btn btn-primary btn-lg" role="navigation" href="/Account/Register">Register</a></p>
+                </div>
+            </modal-dialog>
+            <div class="container-fluid" id="columns">
+                <div ng-controller="MapController">
+                    <!--<ng-map set-height center="[50.450199, 30.527283]" id="map-main"></ng-map> NOT STATIC SIZE-->
+                    <ng-map center="[50.450199, 30.527283]" id="map-main" style="height:700px">
+                        <marker ng-repeat="mark in Coords" position="{{mark.lantitude}},{{mark.longtitude}}"></marker>
+                    </ng-map>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-8">
+            <ul class="nav nav-pills nav-justified">
+                <li><a href="#/restaurant/{{restaurantId}}/news">News</a></li>
+                <li><a href="#/restaurant/{{restaurantId}}/menu">Menu</a></li>
+                <li><a href="#/restaurant/{{restaurantId}}/place">Reservation</a></li>
+                <li><a href="#/restaurant/{{restaurantId}}/photo">Photos</a></li>
+                <li><a href="#/restaurant/{{restaurantId}}/comments">Comments</a></li>
+            </ul>
+            <div class="container-fluid" id="columns1">
+                <div app-view-segment="1"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+            

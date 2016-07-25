@@ -1,0 +1,51 @@
+﻿<md-dialog aria-label="Menu-item" class="menu-dialog">
+    <form>
+        <md-toolbar ng-controller="MenuController">
+
+            <div class="md-toolbar-tools">
+                <h2>{{nameById}}</h2>
+                <span flex></span>
+                <div ng-show="!reservationEditTimeOut(reservation)">
+                    <button ng-click="addItemToReservation()" type="button" class="glyphicon glyphicon-time pull-right reserve-icon">
+
+                        <md-tooltip md-direction="top">
+                            Click to add one to reservation menu - You have ordered {{Count}} items
+                        </md-tooltip>
+                       
+                    </button>
+                </div>
+                
+                 <md-button class="md-icon-button" ng-click="cancel()">
+                    <md-icon md-svg-src="/Content/close_pic.svg" aria-label="Close dialog"></md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+        <md-dialog-content style="max-width:100%;max-height:100%; ">
+            <div >
+                <img src={{pictureUrlById}} class="img-responsive"/>
+                <md-tabs md-dynamic-height md-border-bottom>
+                    <md-tab label="Description">
+                        <md-content class="md-padding" style ="color: #333; font-size: 20px">
+                            {{descriptionById}}
+                        </md-content>
+                    </md-tab>
+                    <md-tab label="Price">
+                        <md-content class="md-padding" style="color: #333; font-size: 20px">
+                            <p>This cost: {{priceById}}$</p>
+                        </md-content>
+                    </md-tab>
+                    <md-tab label="Calories">
+                        <md-content class="md-padding" style="color: #333; font-size: 20px">
+                            <p>{{caloriesById}} calories</p>
+                        </md-content>
+                    </md-tab>
+                    <md-tab label="Preparation Time">
+                        <md-content class="md-padding" style="color: #333; font-size: 20px">
+                            <p>{{preparationTimeById}} minutes</p>
+                        </md-content>
+                    </md-tab>
+                </md-tabs>
+            </div>
+        </md-dialog-content>
+    </form>
+</md-dialog>

@@ -1,0 +1,83 @@
+﻿
+
+<div ng-controller="CommentsController" class="content-top-align">
+
+
+    <div ng-show="checkedModerator() && !checkedComments()">
+
+        <form ng-submit="AddComment(comment)">
+            <textarea id="commentTextArea" class="form-control controls-top-align" required name="text" rows="5" placeholder="Type your comment here" ng-model="comment.Text"></textarea>
+            <button class="btn btn-info content-top-align" type="submit">Add comment</button>
+        </form>
+
+
+    </div>
+
+    <div class="panel-group content-top-align" dir-paginate="comment in restaurantComments  |  orderBy:['comment.DateTime'] : true | itemsPerPage: 6 ">
+
+        <div class="panel panel-primary content-top-align content-block-style content-title-style">
+            <div>
+                <h4>
+                    <span class="content-title-text-style">
+                        User {{comment.User}} commented:
+                    </span>
+
+
+                    <button ng-show="checkedModerator() && !checkedComments() && !timeOut(comment)" ng-click="!timeOut(comment) ? deleteComment(comment) : skip" class="glyphicon glyphicon-remove  pull-right icon-button-style">
+                        <md-tooltip md-direction="top">
+                            Click to delete your comment
+                        </md-tooltip>
+                    </button>
+                    <button ng-show="checkedModerator() && !checkedComments() && !timeOut(comment)" ng-click="!timeOut(comment) ? editComment($event,comment) : skip" class="glyphicon glyphicon-pencil pull-right icon-button-style">
+                        <md-tooltip md-direction="top">
+                            Click to edit your comment
+                        </md-tooltip>
+                    </button>
+
+
+                </h4>
+            </div>
+
+
+
+            <div class="div-wrapper-container">
+                <span class="horizontal-line"></span>
+                <div id="{{comment.CommentId}}" class="panel-body center-block hideOverflow commentContainer ">
+                    <div ng-hide="comment.UserPhotoUrl == undefined">
+                        <img class="img-circle comment-image" ng-src="{{comment.UserPhotoUrl}}">
+                    </div>
+                    <div>
+                        {{comment.Text}}
+                    </div>
+
+                </div>
+                <span class="horizontal-line"></span>
+                <div class="div-wrapper-left text-primary">Commented on: {{comment.DateTime}}</div>
+
+                <div ng-show="!CheckOverflowLengthOfContent(comment.CommentId)">
+
+                    <a id="{{comment.CommentId}}hint" href="" ng-click="CheckHeight(comment.CommentId)" class=" div-wrapper-right">Show more...</a>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+        
+        <dir-pagination-controls ng-show="restaurantComments.length>6"></dir-pagination-controls>
+
+
+
+
+
+
+
+
+
+
+
+
+    
+
+</div>

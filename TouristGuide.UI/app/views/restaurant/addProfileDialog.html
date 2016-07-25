@@ -1,0 +1,57 @@
+﻿<md-dialog aria-label="Add profile">
+    
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2>{{Title}} profile</h2>
+                <span flex></span>
+                <md-button class="md-icon-button" ng-click="cancel()">
+                    <md-icon md-svg-src="/Content/close_pic.svg" aria-label="Close dialog"></md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+
+        <md-dialog-content style="width:680px;height:360px;">
+            <div ng-controller="PageCoordController">
+                <div id="map" class="col-md-8" style="width:350px;height:360px;">                   
+                    {{callEmptyMap()}}
+                </div>
+                <div class="searchBtnProfile">                    
+                    <button class="btn btn-default btn-info" onclick="codeAddress()">
+                        <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                    </button>
+                    <input type="text" id="searchInput" />
+                </div>
+            </div>
+            <div class="col-md-6" style="width:330px;">
+                    <form name=" addprofileform" ng-show="!checkedAdmin()">
+                <div class="form-group">
+                    <div id="formWithData">
+                        <input type="text" style="display:none" class="form-control" id="restLong" name="restLong" ng-model="restData.XCoord" required>
+                        <input type="text" style="display:none" class="form-control" id="restLan" name="restLan" ng-model="restData.YCoord" required>
+                        <div class="content-top-align">Profile name:<div id="profNameError" style="display:none; color: red;">This name is alredy exist</div></div>
+                        <input type="text" class="form-control content-margin" id="name" name="name" ng-model="restData.Name" required>
+                        <h4>Address</h4>
+                        Country:
+                        <input type="text" class="form-control content-margin" id="country" name="country" ng-model="restData.Country" readonly required>
+                        City:
+                        <input type="text" class="form-control content-margin" id="locality" name="city" ng-model="restData.City" readonly required>
+                        <div>Street:</div>
+                        <div>
+                            <div class="houseinput"><input type="text" class="form-control content-margin" id="street_number" name="house" ng-model="restData.Number" readonly required></div>
+                            <input style="float:left; width: 230px;" type="text" class="form-control content-margin" id="route" name="street" ng-model="restData.Street" readonly required>
+                        </div>
+                    </div>
+                    <div id="formWithoutData">
+                        <md-progress-circular class="md-progress-circular-style" md-diameter="235px" style="margin-top: 20px !important;"></md-progress-circular>
+                    </div>                    
+                    <div style="padding-top: 50px;">
+                        <div style="width:100px; ">
+                            <button id="dialog-btn" class="btn btn-default btn-success" style=" padding-left: 30px; padding-right: 30px;" ng-click="answer()">{{Title}}</button>
+                        </div>
+                    </div>
+                </div>
+                </form>
+            </div>            
+        </md-dialog-content>
+    
+</md-dialog>

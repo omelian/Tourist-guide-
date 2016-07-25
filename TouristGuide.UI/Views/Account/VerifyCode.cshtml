@@ -1,0 +1,72 @@
+﻿@model VerifyCodeViewModel
+@{
+    ViewBag.Title = "VerifyCode";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using TouristGuide.UI.Models
+@Styles.Render("~/Content/Site.css")
+<span style ="text-align: center;"><h2>VerifyCode</h2></span>
+@using (Html.BeginForm("VerifyCode", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+@Html.AntiForgeryToken()
+<hr />
+<div class="row marg bord">
+
+    <div class="row marg bord">
+        <div class="col-xs-6 com-md-1-my bord">
+        </div>
+        
+        <div class="col-xs-6 com-md-4-my bord" style="text-align: center;">
+            Check your Email(There should be Mail with Code)
+        </div>
+        <div class="col-xs-6 com-md-2-my bord">
+        </div>
+    </div>
+    <div class="row marg bord">
+        <div class="col-xs-6 com-md-1-my bord">
+        </div>
+        <div class="col-xs-6 com-md-0-my bord">
+        </div>
+        <div class="col-xs-6 com-md-4-my bord">
+            Enter that code here
+        </div>
+        <div class="col-xs-6 com-md-2-my bord">
+        </div>
+    </div>
+    <div class="row marg bord">
+        <div class="col-xs-6 com-md-0-my bord">
+        </div>
+        <div class="col-xs-6 com-md-2-my bord">
+        </div>
+        <div class="col-xs-6 com-md-4-my bord">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger", align = "center", style = " color #1E90FF;" })
+        </div>
+        <div class="col-xs-6 com-md-1-my bord">
+        </div>
+    </div>
+</div>
+<div class="reg">
+    <div class="row marg ">
+        <div class="col-xs-6 com-md-2-my bord">
+        </div>
+        <div class="col-xs-6 com-md-0-my bord">
+            @Html.LabelFor(m => m.Code, new { @class = "control-label marg", align = "right" })
+        </div>
+        <div class="col-xs-6 com-md-4-my bord">
+            @Html.TextBoxFor(m => m.Code, new { @class = "form-control" })
+        </div>
+        <div class="col-xs-6 com-md-1-my bord">
+            @Html.ValidationMessageFor(m => m.Code, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="row marg ">
+        <div class="col-xs-6 com-md-0-my bord">
+        </div>
+        <div class="col-xs-6 com-md-3-my bord "></div>
+        <div class="col-xs-6 com-md-4-my  bord">
+            <input type="submit" class="btn btn-lg-my btn-info btn-block" value="Check" align="center" name="submit" />
+        </div>
+    </div>
+</div>
+}

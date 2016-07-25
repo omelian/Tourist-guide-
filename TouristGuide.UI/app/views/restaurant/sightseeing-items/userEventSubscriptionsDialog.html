@@ -1,0 +1,32 @@
+﻿<md-dialog aria-label="EventSubscriptions" ng-cloak class="reservation" style=" width: 500px;">
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <h4>{{currentUser.Name}} Subscriptions</h4>
+            <span flex></span>
+            <md-button class="md-icon-button" ng-click="cancel()">
+                <span class="glyphicon glyphicon-remove" aria-hidden="true" aria-label="Close dialog">
+            </md-button>
+        </div>
+    </md-toolbar>
+
+    <md-dialog-content class="md-dialog-content">
+        <div ng-repeat="event in userEventsList">
+            
+            <span class="glyphicon glyphicon-trash pull-right" id="trash" ng-click="deleteSubscription($event,event.SubscriptionId)" ></span>
+                <div class="md-3-line list-style-info" ng-click="showReservation(reservation)" style=" background-image: url('{{event.EventPhoto}}'); cursor:auto; ">
+                    <div class="md-list-item-text " layout="column" style="cursor: auto; width:40%; padding-left:2px;">
+                        <h3>{{ event.EventName }}</h3>
+                        <h4>Date - {{ event.EventDate }}</h4>
+                        <h4>Persons - {{ event.NumberOfPersons}}</h4>
+
+                    </div>
+
+                </div>
+            
+        </div>  
+            
+        
+</md-dialog-content>
+
+
+</md-dialog>

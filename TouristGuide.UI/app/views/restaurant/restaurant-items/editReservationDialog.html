@@ -1,0 +1,50 @@
+﻿<md-dialog aria-label="ReservationEdit" ng-cloak class="reservation">
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <h4>Reservation {{myReservation.ProfileName}}</h4>
+            <span flex></span>
+            <md-button class="md-icon-button" ng-click="cancel()">
+                <span class="glyphicon glyphicon-remove" aria-hidden="true" aria-label="Close dialog">
+            </md-button>
+        </div>
+    </md-toolbar>
+
+    <md-dialog-content class="md-dialog-content reserv">
+        <form name="reservationForm" ng-submit="sendReservation()">
+            <h4>Choose number of persons</h4>
+            <md-radio-group class="radio-button" ng-model="numOfPersons">
+                <md-radio-button value="2" class="md-primary" >1-2</md-radio-button>
+                <md-radio-button value="5" class="md-primary"> 3-5 </md-radio-button>
+                <md-radio-button value="10" class="md-primary">5-10</md-radio-button>
+                <md-radio-button value="11" class="md-primary">>10</md-radio-button>
+            </md-radio-group>
+            <h6 id="reserv-error">{{numberStatus}}</h6>
+            <h4>Choose Date  <div style="display:inline-block"  class="glyphicon glyphicon-question-sign">
+                <md-tooltip md-direction="right">     
+You can make a reservation no earlier than one hour before the visit
+                    </md-tooltip></div></h4>
+
+
+            <md-select class="reserv-dropdown" placeholder="Date" ng-model="dayOfReservation" md-on-load="loadDateOfReservation()" >
+                <md-option ng-value="day" ng-repeat="day in days" ng-selected="day.day ===  dayOfReservation ? 'true':'false'">{{day.view}}</md-option>
+            </md-select>
+
+            <md-select class="reserv-dropdown-hour" placeholder="Hour" ng-model="hourOfReservation" md-on-open="loadHourOfReservation()" >
+                <md-option ng-value="hour" ng-repeat="hour in hours " ng-selected="hour.hour ===  hourOfReservation ? 'true':'false'">{{hour.view}}</md-option>
+            </md-select><strong>:</strong>
+
+            <md-select class="reserv-dropdown-minute" placeholder="Minute" ng-model="minuteOfReservation" md-on-open="loadMinuteOfReservation()" >
+                <md-option ng-value=" minute" ng-repeat="minute in minutes " ng-selected="minute.minute ===  minuteOfReservation ? 'true':'false'">
+                    {{minute.view}}
+                </md-option>
+            </md-select>
+            <h6 id="reserv-error">{{dayStatus}}</h6><h6 id="reserv-error">{{hourStatus}}</h6><h6 id="reserv-error">{{minuteStatus}}</h6>
+            {{checked()}}
+            <md-button class="md-raised md-primary" type="submit" id="butRes">Commit reservation</md-button>
+        </form>
+    </md-dialog-content>
+
+
+</md-dialog>
+
+<link href="../../../../Content/reserv.css" rel="stylesheet" />

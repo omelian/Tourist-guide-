@@ -1,0 +1,93 @@
+﻿<div ng-controller="SightseeingPageController">
+    <div class="col-md-3">
+        <div id="columns">
+
+            <div class="row">
+                <!--<a href="#/sightseeing/{{sightseeingId}}/news" class="navbar-brand nameAndAddress">
+                </a>-->
+                <div class="navbar-brand nameAndAddress">
+                    <h4 style="overflow:hidden;">{{sightseeing.Name}}</h4>
+                    <h5 style="overflow:hidden" class="text-muted">{{sightseeing.City}},{{sightseeing.Street}},{{sightseeing.Number}}</h5>
+                </div>
+                <div ng-show="!checkedModerator() || !checkedAdmin()" style="display:inline-block;margin-top:4px">
+                    <md-switch ng-model="sightseeing.IsShowed" aria-label="Switch 1" style="display:block" ng-click="isAvailable()">
+                    </md-switch>
+                    <md-tooltip md-direction="right">
+                        {{isShowedText}}
+                    </md-tooltip>
+                </div>
+            </div>
+        </div>
+        <div ng-controller="AppCtrl">
+            <div class="fake-map" id="Div1" ng-click="showMapDialog($event)">
+                <img style="width:100%; height:200px;" src="../../../../../Content/img_map.png">
+                <div class="expandMape">
+                    <span class=" text"> View map</span>
+                </div>
+            </div>
+        </div>
+        <div id="Div2">
+            <div ng-controller="RatesController">
+                <uib-rating ng-model="rate" ng-click="SetRestaurantRate(overStar)" max="max" read-only="currentUser.Role != 'User'" on-hover="hoveringOver(value)" on-leave="    overStar = null" aria-labelledby="default-rating">
+                </uib-rating>
+                <span class="label" ng-class="{'label-warning': percent<30, 'label-info': percent>=30 && percent<70, 'label-success': percent>=70}" ng-show="overStar && !isReadonly">{{percent}}%</span>
+                <pre style="margin:20px 0;">Rate: <b>{{rate | number}}</b> - Based on: <i>{{restaurantRates.length}}</i> rates</pre>
+            </div>
+
+            <button ng-show="checkedAdmin()" type="button" class="btn btn-default btn-info" ng-click="addToFavorits()" id="page_buttons"></button>
+
+            <div style="margin-left:1%;" class="bg-primary reservation-row-item text-center" ng-show="userEventsCheck()">
+                <div style="padding-top: 4px;padding-bottom:4px;  height: 100% !important; font-size:16px;">
+                    <div>
+                        Your subscriptions on events
+                        <span class="pull-right">
+                            <button ng-click=" showUserEvents()" class="glyphicon glyphicon-pencil icon-button-style" style="margin-top:2px;">
+                                <md-tooltip md-direction="top">
+                                    Click to edit your events
+                                </md-tooltip>
+                            </button>
+                            <button ng-click="isCollapsed = !isCollapsed" class="glyphicon glyphicon-arrow-down icon-button-style" style="margin-top:2px;">
+                                <md-tooltip md-direction="top">
+                                    Click to watch your events
+                                </md-tooltip>
+                            </button>
+
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div uib-collapse="isCollapsed" style="margin-left:1%;">
+                <div ng-repeat="event in userEvents" class="list-group">
+
+                    <div class="md-list-item-text  list-group-item list-style" layout=" column" style=" background-image: url('{{event.EventPhoto}}'); ">
+                        <div style=" width: 40%">
+                            <h4 class="container-fluid">{{ event.EventName }}</h4>
+                            <h5 class="container-fluid">Date - {{ event.EventDate }}</h5>
+                            <h5 class="container-fluid">Persons - {{ event.NumberOfPersons}}</h5>
+                        </div>
+
+                    </div>
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-9 restourantItems">
+        <ul ng-show="checkedAdmin()" ng-controller="TabController" class="nav nav-pills nav-justified profile-type-list" id="navig-tabs">
+            <li ng-class="{active: isActive('/sightseeing/{{sightseeingId}}/news')}" role="presentation"> <a href="#/sightseeing/{{sightseeingId}}/news">News</a></li>
+            <li ng-class="{active: isActive('/sightseeing/{{sightseeingId}}/poster')}" role="presentation"><a href="#/sightseeing/{{sightseeingId}}/poster">Poster</a> </li>
+            <li ng-class="{active: isActive('/sightseeing/{{sightseeingId}}/photo')} " role="presentation"><a href="#/sightseeing/{{sightseeingId}}/photo">Photos</a></li>
+            <li ng-class="{active: isActive('/sightseeing/{{sightseeingId}}/information')}" role="presentation"><a href="#/sightseeing/{{sightseeingId}}/information">Information</a></li>
+            <li ng-class="{active: isActive('/sightseeing/{{sightseeingId}}/comments')}" role="presentation"><a href="#/sightseeing/{{sightseeingId}}/comments">Comments</a></li>
+
+
+        </ul>
+        <div id="columns1">
+            <div app-view-segment="1"></div>
+        </div>
+    </div>
+
+
+</div>

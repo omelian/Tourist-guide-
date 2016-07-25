@@ -1,0 +1,27 @@
+﻿
+<md-dialog aria-label="News" class="news-popup-size">
+
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <h2>Last edit - {{commentToEdit.DateTime}}</h2>
+            <span flex></span>
+            <md-button class="md-icon-button" ng-click="cancel()">
+                <md-icon md-svg-src="/Content/close_pic.svg" aria-label="Close dialog"></md-icon>
+            </md-button>
+        </div>
+    </md-toolbar>
+
+    <md-dialog-content class="news-popup-content-padding">
+
+        <form name="myform" ng-submit="answer(commentToEdit)">
+            <div class="form-group">
+                <textarea class="form-control" name="Text" rows="17" placeholder="Your comment" required ng-model="commentToEdit.Text"></textarea>
+            </div>
+            <button class="div-wrapper-left padding-div-wrapper-left btn btn-info" >Save</button>
+        </form>
+
+
+    </md-dialog-content>
+
+</md-dialog>
+

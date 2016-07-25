@@ -1,0 +1,26 @@
+﻿<md-dialog aria-label="Set moderator" class="moderatorSetDialog">
+
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <h2>Set moderator</h2>
+            <span flex></span>
+            <md-button class="md-icon-button" ng-click="cancel()">
+                <md-icon md-svg-src="/Content/close_pic.svg" aria-label="Close dialog"></md-icon>
+            </md-button>
+        </div>
+    </md-toolbar>
+    <md-dialog-content style="padding:10px;">
+        <form name="setModerForm" ng-show="!checkedAdmin()" id="setmoder" ng-submit="answer(moder)">
+            <div id="formWithData">
+                Email: <div id="emainError" style="color:red; display:none;">Error: </div>
+                <input type="email" class="form-control controls-top-align" id="email" name="email" required ng-model="moder.Email">                
+            </div>
+            <div id="formWithoutData">
+                <md-progress-circular class="md-progress-circular-style" md-diameter="70px" style="margin-top: 1px !important;"></md-progress-circular>
+            </div>
+            <div style="width:100px; margin-top: 10px;">
+                <button id="dialog-btn" class="btn btn-default btn-success" style="padding-left: 30px; padding-right: 30px;" type="submit">Set</button>
+            </div>
+        </form>
+    </md-dialog-content>
+</md-dialog>

@@ -1,0 +1,29 @@
+﻿
+<md-dialog class="confirm-popup-size ">
+
+
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+
+            <h2>{{Title}}</h2>
+            <span flex></span>
+        </div>
+
+    </md-toolbar>
+
+    <md-dialog-content>
+        <h3 class="news-popup-content-margin news-popup-content-padding">{{Message}}</h3>
+
+
+        <div class="confirm-buttons-box">
+            <button type="button" class="btn btn-primary confirm-buttons-style"  ng-click="answer(false)">No</button>
+            <button id="yesButton" type="button" class="btn btn-danger confirm-buttons-style " ng-click="answer(true)" autofocus>Yes</button>
+        </div>
+
+    </md-dialog-content>
+
+
+
+</md-dialog>
+
+

@@ -1,0 +1,19 @@
+﻿
+    <h1>Help</h1>
+    <div ng-controller="CoordsController">
+        <ul>
+            <li ng-repeat="coord in Coords">
+                {{coord.longtitude}}
+                {{coord.lantitude}}
+            </li>
+        </ul>
+        </div> 
+<div ng-controller="ExampleController">
+    <h1>{{lox}}</h1> 
+</div> 
+<div ng-controller="MapController">
+    <ng-map center="[50.450199, 30.527232]" style="height:600px;">
+        <marker ng-repeat="coord in Coords" position="{{coord.lantitude}},{{coord.longtitude}}"></marker>
+    </ng-map>
+</div>
+

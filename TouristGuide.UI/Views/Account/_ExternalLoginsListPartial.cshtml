@@ -1,0 +1,26 @@
+﻿@model TouristGuide.UI.Models.ExternalLoginListViewModel
+@using Microsoft.Owin.Security
+
+
+
+@{
+    var loginProviders = Context.GetOwinContext().Authentication.GetExternalAuthenticationTypes();    
+    
+        using (Html.BeginForm("ExternalLogin", "Account", new { ReturnUrl = Model.ReturnUrl }))
+        {
+            @Html.AntiForgeryToken()
+            <div id="socialLoginList">          
+                    @foreach (AuthenticationDescription p in loginProviders)
+                    {
+                        if (@p.AuthenticationType == "Facebook")
+                        {                            
+                            <button type="submit" class="btn facebook-btn" id="@p.AuthenticationType" name="provider" value="@p.AuthenticationType" title="Log in with @p.Caption" displaytext='Facebook'></button>
+                        }                        
+                        if (@p.AuthenticationType == "Google")
+                        {
+                            <button type="submit" class="btn google-btn" id="@p.AuthenticationType" name="provider" value="@p.AuthenticationType" title="Log in with @p.Caption" displaytext='Google +'></button>
+                        }
+                    }
+            </div>
+        }
+}

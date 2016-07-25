@@ -1,0 +1,42 @@
+﻿
+    <md-dialog aria-label="News" style="width:50%;height:50%">
+
+        <md-toolbar>
+            <div  class="md-toolbar-tools">
+                <h2>News edit</h2>
+                <span flex></span>
+                <md-button class="md-icon-button" ng-click="cancel()">
+                    <md-icon md-svg-src="/Content/close_pic.svg" aria-label="Close dialog"></md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+
+        <md-dialog-content style="padding:5px;">
+
+            
+            <form ng-show="!checkedModerator()" ng-submit="answer(editNews)">
+                <textarea class="form-control controls-top-align" required id="Title" name="title" rows="1" placeholder="Title" ng-model="editNews.Title">{{editNews.Title}}</textarea>
+
+                <textarea class="form-control controls-top-align" required id="Text" name="text" rows="8" placeholder="Text" ng-model="editNews.TextContent">{{editNews.TextContent}}</textarea>
+
+                <button class="btn btn-default controls-top-align" type="submit">Save</button>
+            </form>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</md-dialog-content>
+
+    </md-dialog>
+

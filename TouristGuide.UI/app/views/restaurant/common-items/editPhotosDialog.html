@@ -1,0 +1,53 @@
+﻿
+    <md-dialog aria-label="News" class="popup-photo-item-container">
+
+
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+               
+
+                <h2>Select photos to delete</h2>
+                <span flex></span>
+
+                <button class="glyphicon glyphicon-check icon-photo-button-style" ng-click="selectAll()">
+                    <md-tooltip md-direction="top">
+                        Select all
+                    </md-tooltip>
+                </button>
+
+                <button class="glyphicon glyphicon-ok icon-photo-button-style" ng-click="answer()">
+                    <md-tooltip md-direction="top">
+                        Save changes and close
+                    </md-tooltip>
+                </button>
+                <button class="glyphicon glyphicon-remove icon-photo-button-style" ng-click="cancel()">
+                    <md-tooltip md-direction="top">
+                       Close without saving
+                    </md-tooltip>
+                </button>
+            </div>
+
+        </md-toolbar>
+
+            <md-dialog-content >
+
+
+
+                <div class="photo-popup-container" ng-repeat="item in myslides">
+
+
+                    <img style="opacity:{{item.Opacity}}" ng-src="{{item.Url}}" ng-click=" mark(item)" class="img-thumbnail collage-item">
+
+                        <md-tooltip md-direction="top">
+                            Click to mark as deleted or undeleted
+                        </md-tooltip>
+
+                </div>
+
+            </md-dialog-content>
+
+      
+
+    </md-dialog>
+
+

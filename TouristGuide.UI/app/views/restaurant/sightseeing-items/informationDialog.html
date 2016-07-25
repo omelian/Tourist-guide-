@@ -1,0 +1,57 @@
+﻿<md-dialog aria-label="Information" class="news-popup-size" style="height:100%">
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <span flex></span>
+            <md-button class="md-icon-button" ng-click="cancel()">
+                <md-icon md-svg-src="/Content/close_pic.svg" aria-label="Close dialog"></md-icon>
+            </md-button>
+        </div>
+    </md-toolbar>
+
+    <md-dialog-content class="news-popup-content-padding">
+
+
+        <form ng-hide="checkedModerator()">
+
+
+            <div class="form-group {{TitleStyle}}">
+
+                <input id="titleError" class="form-control" required ng-change="CheckTitle(editInformation.Title)" name="Title" placeholder="Information title" ng-model="editInformation.Title">
+                <md-tooltip md-direction="top">{{TitleError}}</md-tooltip>
+            </div>
+
+            <label class="upload-drop-zone-news">
+                <img class="stretch-to-container" ng-src="{{editInformation.PictureUrl}}" />
+
+                <input id="fileInput" type="file" accept="image/*" multiple onchange="angular.element(this).scope().onDrop(this)" style="display: none;">
+
+                <md-tooltip md-direction="top">
+                    Click to select photo for upload
+                </md-tooltip>
+            </label>
+            <div class="form-group {{ContentStyle}} news-with-image-content-style">
+                <textarea id="contentError" required class="form-control" ng-change="CheckContent(editInformation.Text)" name="text" rows="15" placeholder="Information content" ng-model="editInformation.Text"></textarea>
+                <md-tooltip md-direction="top">
+                    {{ContentError}}
+                </md-tooltip>
+            </div>
+            <md-input-container class="menu-input">
+                <label>Email</label>
+                <input type="text" ng-model="editInformation.Email">
+            </md-input-container>
+            <md-input-container class="menu-input">
+                <label>Phone Number</label>
+                <input type="text" ng-model="editInformation.PhoneNumber">
+            </md-input-container>
+            <md-input-container class="menu-input">
+                <label>FacebookUrl</label>
+                <input type="text" ng-model="editInformation.FacebookReference">
+            </md-input-container>
+            <button type="submit" class="padding-div-wrapper-left btn btn-info" ng-click=" ValidateForm() ? answer(editInformation) : skip">Save</button>
+        </form>
+
+
+    </md-dialog-content>
+
+</md-dialog>
+

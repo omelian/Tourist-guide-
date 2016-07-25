@@ -1,0 +1,65 @@
+﻿<div class="row" ng-controller="InformationController">
+    <div class="col-md-12">
+        <button type="button" class="btn btn-default btn-info list-top" ng-show="!checkedModerator()" ng-click='ShowInformationEditor($event,article)' style="margin-left:6px;">
+            <md-tooltip md-direction="right">
+                Click this button for filling information page
+            </md-tooltip>
+            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Fill Information
+        </button>
+        <md-card>
+            <img ng-src={{article.PictureUrl}} class="md-card-image" alt="Washed Out" style="max-height:370px">
+            <md-card-title>
+                <md-card-title-text>
+                    <span class="md-headline">{{article.Title}}</span>
+                </md-card-title-text>
+            </md-card-title>
+            <md-card-content>
+                {{article.Text}}
+            </md-card-content>
+        </md-card>
+    </div>
+    <div class="col-md-12">
+        <md-card>
+            <md-card-title class="contact-card">
+                <md-card-title-text><span class="md-headline" style="text-align:center">Contacts</md-card-title-text>
+            </md-card-title>
+            <md-card-content>
+                <div class="row">
+                    <ul class="ch-grid">
+                        <li>
+                            <a href="mailto:{{article.Email}}?Subject=Hello%20{{sightseeing.Name}}" class="link-hover">
+                                <div class="ch-item link-hover">
+                                    <i class="contact-icon">✉</i>
+                                    <div class="ch-info">
+                                        <h3>EMAIL</h3>
+                                        <p>{{article.Email}}</p>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <div class="ch-item">
+                                <i class="contact-icon">📱</i>
+                                <div class="ch-info">
+                                    <h3>Phone number</h3>
+                                    <p>{{article.PhoneNumber}}</p>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <a href={{article.FacebookReference}} class="link-hover" target="_blank">
+                                <div class="ch-item link-hover">
+                                    <img class="ch-img-1" src="../Content/facebook-logo.svg">
+                                    <div class="ch-info">
+                                        <h3>Facebook</h3>
+                                        <p>Join Us</p>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </md-card-content>
+        </md-card>
+    </div>
+</div>

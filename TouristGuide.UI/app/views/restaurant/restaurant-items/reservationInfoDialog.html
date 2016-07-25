@@ -1,0 +1,24 @@
+﻿<md-dialog aria-label="Reservation" ng-cloak class="reservation">
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <h4>Reservation info</h4>
+            <span flex></span>
+            <md-button class="md-icon-button" ng-click="cancel()">
+                <span class="glyphicon glyphicon-remove" aria-hidden="true" aria-label="Close dialog">
+            </md-button>
+        </div>
+    </md-toolbar>
+
+    <md-dialog-content class="md-dialog-content">
+        <h5 >Restaurant - {{myRerervation.ProfileName}}</h5>
+        <h5> User - {{myRerervation.UserName}}</h5> 
+        <h5>Persons - {{myRerervation.NumberOfPersons }}</h5>
+        <h5> Date - {{myRerervation.ReservationDate}}</h5>
+    <md-button class="md-raised md-primary" type="submit" id="butRes-ok" ng-click="editReservation()">Edit</md-button>
+    <md-button class="md-raised md-primary" type="submit" id="butRes-delete" ng-click="deleteReservation()">Delete</md-button>
+    </md-dialog-content>
+
+
+</md-dialog>
+
+<link href="../../../../Content/reserv.css" rel="stylesheet" />

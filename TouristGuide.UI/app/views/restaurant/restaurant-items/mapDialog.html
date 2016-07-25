@@ -1,0 +1,21 @@
+﻿<md-dialog aria-label="Map">
+    <form>
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2>Map</h2>
+                <span flex></span>
+                <md-button class="md-icon-button" ng-click="cancel()">
+                    <md-icon md-svg-src="/Content/close_pic.svg" aria-label="Close dialog"></md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+
+        <md-dialog-content class="map-popup-content">
+            <div ng-controller="PageCoordController">
+                <div id="map" style="width:1500px;height:700px;">
+                </div>
+            </div>
+        </md-dialog-content>
+    </form>
+</md-dialog>
+

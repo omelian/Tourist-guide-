@@ -1,0 +1,95 @@
+﻿
+<md-dialog class="popup-photo-item-container">
+
+
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+
+
+            <h2>Please, choose menu for reservation</h2>
+            <span flex></span>
+            <button class="glyphicon glyphicon-ok icon-photo-button-style" ng-click="answer()">
+                <md-tooltip md-direction="top">
+                    Save changes and close
+                </md-tooltip>
+            </button>
+            <button class="glyphicon glyphicon-remove icon-photo-button-style" ng-click="cancel()">
+                <md-tooltip md-direction="top">
+                    Close without saving
+                </md-tooltip>
+            </button>
+        </div>
+
+    </md-toolbar>
+
+    <md-dialog-content style="height:420px">
+
+
+
+        <div ng-controller="ReservationMenuController">
+
+            <div class="col-md-12 content-top-align">
+                <select class="form-control list-top" ng-model="selectModel" ng-change="changeModel(this)">
+                    <option ng-repeat="option in dishTypes">{{option}}</option>
+                </select>
+            </div>
+
+
+
+            <div dir-paginate="menu in menuList|filter:{DishType:showModel}|itemsPerPage: 6">
+                <div class="col-md-4 list-top" style="float:left;">
+                    <div class="hovereffect" style="opacity:{{menu.Opacity}}" ng-init="menu.Count > 0 ? menu.Opacity = 1 : menu.Opacity = 0.5">
+
+                        <md-tooltip md-direction=" top">
+                            Click to add one item to order
+                        </md-tooltip>
+                        <div class="image">
+
+                            <img ng-src="{{menu.PictureUrl}}" class="img-responsive" ng-click="chooseOne(menu)" style="width:100%;height:200px;" />
+                            <h2 style="color: #000000"><div>{{menu.Name}}</div></h2>
+                        </div>
+                        <div class="overlay">
+                            <p>{{menu.Description}}</p>
+                        </div>
+                    </div>
+
+                    <h5> <span class="pull-left controls-top-align">Count of items for order:</span></h5>
+                    <div class="pull-right road-to-icon">
+
+                        <md-input-container >
+                            <md-tooltip md-direction="top">
+                                Please, choose or enter count of items between 0 and {{maxValue}}
+                            </md-tooltip>
+
+
+                            <input style="max-width:40px" type="number" required value="{{menu.Count}}" ng-change="onItemCountChange(menu)" ng-model="menu.Count" name="quantity" min="0" max="{{maxValue}}">
+
+                        </md-input-container>
+                        <button ng-disabled="menu.Count<1"ng-click="menu.Count = 0;onItemCountChange(menu)" class="glyphicon glyphicon-remove icon-button-style">
+                            <md-tooltip md-direction="top">
+                                Click to delete item from order
+                            </md-tooltip>
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+        <div style="clear: both;"></div>
+            <dir-pagination-controls></dir-pagination-controls>
+     
+
+    </md-dialog-content>
+    <div class="photo-server-message bg-danger" style="position:fixed;left:33%" ng-show="!validated" id="serverResponse">Please, enter correct numer of menu item!</div>
+    <md-dialog-content style="height:80px">
+        <div style="float:left;width:100%;height:100%;border-top:1px solid gray;">
+            <h4>Total Price: {{TotalPrice}} $</h4>
+            <h4>Total Calories: {{TotalCalories}} cal</h4>
+        </div>
+    </md-dialog-content>
+    
+</md-dialog>
+
+

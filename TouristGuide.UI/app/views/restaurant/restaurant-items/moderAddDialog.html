@@ -1,0 +1,35 @@
+﻿<md-dialog aria-label="New moderator" class="moderatorAddDialog">
+
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <h2>Create moderator</h2>
+            <span flex></span>
+            <md-button class="md-icon-button" ng-click="cancel()">
+                <md-icon md-svg-src="/Content/close_pic.svg" aria-label="Close dialog"></md-icon>
+            </md-button>
+        </div>
+    </md-toolbar>
+    <md-dialog-content style="padding:10px;">
+        <form name="addModerForm" ng-show="!checkedAdmin()" id="addmoder" ng-submit="answer(moder)">
+            <div id="formWithData">
+                Email: <div id="emainError" style="color:red; display:none;">This email is alredy exist</div>
+                <input type="email" class="form-control controls-top-align" id="email" name="email" required ng-model="moder.Email">
+                Password:
+                <input id="Password" type="password" class="form-control controls-top-align" onkeyup="angular.element(this).scope().checkPassword()" name="password" required ng-model="moder.Password">
+                <div class="password-icons">
+                    <button type="button" onmousedown="angular.element(this).scope().ShowHidePassword('Password')" onmouseup="angular.element(this).scope().ShowHidePassword('Password')" class="glyphicon glyphicon-eye-open pull-right showHideText"></button>
+                </div>
+                Confirm password:<div id="passwordError" style="color: red; display: none;"> -Password doesn't match</div>
+                <input id="ConfirmPassword" type="password" class="form-control controls-top-align" onkeyup="angular.element(this).scope().checkPassword()" name="confirmpassword" required ng-model="moder.ConfirmPassword">
+                <button type="button" onmousedown="angular.element(this).scope().ShowHidePassword('ConfirmPassword')" onmouseup="angular.element(this).scope().ShowHidePassword('ConfirmPassword')" class="glyphicon glyphicon-eye-open pull-right showHideText"></button>
+            </div>
+            <div id="formWithoutData">
+                <md-progress-circular class="md-progress-circular-style" md-diameter="200px" style="margin-top: 12px !important;"></md-progress-circular>
+            </div>           
+              <div style="width:100px; margin-top: 10px;">
+                  <button id="dialog-btn" class="btn btn-default btn-success" style="padding-left: 30px; padding-right: 30px;" onclick="angular.element(this).scope().chackValid()" type="submit">Create</button>
+            </div>
+        </form>
+    </md-dialog-content>
+</md-dialog>
+

@@ -1,0 +1,76 @@
+﻿<md-dialog aria-label="Add menu item">
+    <form ng-submit="sendEvent()" role="form">
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2>Add new event item</h2>
+                <span flex></span>
+                <md-button class="md-icon-button" ng-click="cancel()">
+                    <md-icon md-svg-src="/Content/close_pic.svg" aria-label="Close dialog"></md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+
+        <md-dialog-content>
+            <div class="row" style="margin-left:20px;margin-right:20px;">
+                <div class="col-md-6">
+                    <md-input-container class="menu-input">
+                        <label>Name</label>
+                        <input type="text" ng-model="name" required md-maxlength="40">
+                    </md-input-container>
+                    <md-input-container class="menu-input">
+                        <label>Description</label>
+                        <input type="text" ng-model="description" required md-maxlength="300">
+                    </md-input-container>
+                    <md-input-container class="md-icon-float md-block menu-input">
+                        <label>Input price</label>
+                        <input ng-model="price" type="number" required step="1" min="0" max="15000">
+                    </md-input-container>
+                    
+                   
+                    <md-datepicker ng-model="dayOfEvent" md-placeholder="Enter date" ng-required md-min-date="minDate" md-max-date="maxDate" ></md-datepicker>
+
+                        <md-select class="event-dropdown-hour" placeholder="Hour" ng-required ng-model="hourOfEvent" md-on-open="loadHourOfEvent()">
+                            <md-option ng-value="hour" ng-repeat="hour in hours ">{{hour.view}}</md-option>
+                        </md-select><strong>:</strong>
+
+                        <md-select class="event-dropdown-minute" placeholder="Minute" ng-required ng-model="minuteOfEvent" md-on-open="loadMinuteOfEvent()">
+                            <md-option ng-value=" minute" ng-repeat="minute in minutes ">
+                                {{minute.view}}
+                            </md-option>
+                        </md-select>
+                    <h6 id="reserv-error">{{dayStatus}}</h6><h6 id="reserv-error">{{hourStatus}}</h6><h6 id="reserv-error">{{minuteStatus}}</h6>
+            {{checked()}}
+                    <md-input-container class="one-row-menu">
+                         <label>Duration (hours)</label>
+                         <input type="number" ng-model="duration" required min="0" max="72">
+                    </md-input-container>
+                    <md-input-container class="one-row-menu">
+                         <label>Number of participant</label>
+                         <input type="number" ng-model="numberOfParticipant" required max="10000">
+                    </md-input-container>
+
+</div>
+                <div class="col-md-6">
+                    <label class="upload-drop-zone-menu">
+                        <img class="stretch-to-container" style="max-width:400px; max-height:300px" id="image" ng-src="{{photoUrl}}" />
+
+                        <input id="fileInput" type="file" accept="image/*" multiple onchange="angular.element(this).scope().onDrop(this)" style="display: none;">
+
+                        <md-tooltip md-direction="top">
+                            Click to select photo for upload
+                        </md-tooltip>
+                    </label>
+
+                    <md-input-container class="menu-input">
+                        <label>PhotoUrl</label>
+                        <input type="text" ng-model="photoUrl" required>
+                    </md-input-container>
+                </div>
+                <button type="submit" class="btn btn-default btn-info" style="margin: 0 20px 20px 20px; width:150px ;float:left;">
+                    <span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span> Add
+                </button>
+
+            </div>
+        </md-dialog-content>
+    </form>
+</md-dialog>

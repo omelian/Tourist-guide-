@@ -1,0 +1,19 @@
+﻿<div ng-controller="ModeratorsController">
+        <div class="moderator-content">
+                <div style="text-align:center;"><h3>Profile moderators</h3></div>
+                <table class="table table-bordered moderatorList">
+                    <tr><th style="text-align:center;">Email</th><th></th></tr>
+                    <tr ng-repeat="moder in restaurantModerators track by (moder.Id + $index)">
+                        <td><div style="margin: auto !important;">{{moder.Email}}</div></td>
+                        <td><button type="button" ng-click="DeleteModerator(moder)" class="btn btn-danger custom  moderatorIconDelete">Delete</button></td>
+                    </tr>
+                </table>
+            <div class="addModeratorBtn" style="float:right;">
+                <button type="button" class="btn btn-default btn-success" ng-click="showAddModerator($event)">Add new moderator</button>
+            </div>
+            <div class="addModeratorBtn">
+                <button type="button" class="btn btn-default btn-success" ng-click="showSetModerator($event)">Set moderator</button>
+            </div>
+            
+        </div>
+</div>

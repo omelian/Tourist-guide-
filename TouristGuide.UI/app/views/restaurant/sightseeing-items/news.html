@@ -1,0 +1,65 @@
+﻿
+<div  ng-controller="NewsController" class="content-top-align">
+
+    <div ng-show="!checkedModerator()">
+        <button type="button" class="btn btn-info" ng-click="showNewsAdd($event)">Add news</button>
+    </div>
+
+    <div class="panel-group content-top-align " dir-paginate="news in restaurantNews | orderBy:['news.DateTime'] : true | filter:{isRight:'!true'}  |  itemsPerPage: 6">
+
+        <div class="panel panel-primary content-top-align content-block-style content-title-style">
+            <div>
+                <h4>
+
+                    <span class="content-title-text-style"> {{news.Title}}</span>
+
+                    <button ng-show="!checkedModerator()" ng-click="deleteNews(news)" class="glyphicon glyphicon-remove  pull-right icon-button-style">
+                        <md-tooltip md-direction="top">
+                            Click to delete news
+                        </md-tooltip>
+                    </button>
+                    <button ng-show="!checkedModerator()" ng-click="showNewsEditor($event,news)" class="glyphicon glyphicon-pencil pull-right icon-button-style">
+                        <md-tooltip md-direction="top">
+                            Click to edit news
+                        </md-tooltip>
+                    </button>
+
+                </h4>
+            </div>
+
+
+
+
+
+            <div class="div-wrapper-container">
+                <span class="horizontal-line"></span>
+
+                <div id="{{news.NewsId}}" class="panel-body center-block hideOverflow newsContainer ">
+                    <div ng-hide="news.NewsImageUrl.length<4">
+                        <img class="img-thumbnail news-image" ng-src="{{news.NewsImageUrl}}">
+                    </div>
+                    <div>{{news.TextContent}}</div>
+
+                </div>
+                <span class="horizontal-line"></span>
+                <div class="div-wrapper-left text-primary">Published on: {{news.DateTime}}</div>
+
+                <div ng-show="!CheckOverflowLengthOfContent(news.NewsId)">
+
+                    <a id="{{news.NewsId}}hint" href="" ng-click="CheckHeight(news.NewsId)" class=" div-wrapper-right">Show more...</a>
+                </div>
+
+
+            </div>
+
+        </div>
+
+    </div>
+    <dir-pagination-controls ng-show="restaurantNews.length>6"></dir-pagination-controls>
+
+  
+
+ 
+   
+  
+</div>

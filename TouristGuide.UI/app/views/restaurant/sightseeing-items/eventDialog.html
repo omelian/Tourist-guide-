@@ -1,0 +1,51 @@
+﻿<md-dialog aria-label="Event-item" class="menu-dialog">
+    <form>
+        <md-toolbar ng-controller="PosterController">
+
+            <div class="md-toolbar-tools">
+                <h2>{{event.Name}}</h2>
+                <span flex></span>
+                <div ng-show="checkedUser()">
+                    <button ng-click="eventSubscribe()" type="button" class="{{glyphicon}}">
+
+                        <md-tooltip md-direction="top">
+                            {{tooltip}}
+                        </md-tooltip>
+                    </button>
+                    {{checkEventSubscription();}}
+                </div>
+
+                <md-button class="md-icon-button" ng-click="cancel()">
+                    <md-icon md-svg-src="/Content/close_pic.svg" aria-label="Close dialog"></md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+        <md-dialog-content style="max-width:100%;max-height:100%; ">
+            <div>
+                <img src={{event.EventPhoto}} class="img-responsive" />
+                <md-tabs md-dynamic-height md-border-bottom>
+                    <md-tab label="Description">
+                        <md-content class="md-padding" style="color: #333; font-size: 20px">
+                            {{event.Description}}
+                        </md-content>
+                    </md-tab>
+                    <md-tab label="Date">
+                        <md-content class="md-padding" style="color: #333; font-size: 20px">
+                            <p>Date - {{event.EventDate}}, duration {{event.Duration}} hours</p>
+                        </md-content>
+                    </md-tab>
+                    <md-tab label="Number Of Participant">
+                        <md-content class="md-padding" style="color: #333; font-size: 20px">
+                            <p>Number of Participant - {{event.NumberOfParticipant}} </p>
+                        </md-content>
+                    </md-tab>
+                    <md-tab label="Price">
+                        <md-content class="md-padding" style="color: #333; font-size: 20px">
+                            <p>Price  {{event.Price}}$</p>
+                        </md-content>
+                    </md-tab>
+                </md-tabs>
+            </div>
+        </md-dialog-content>
+    </form>
+</md-dialog>

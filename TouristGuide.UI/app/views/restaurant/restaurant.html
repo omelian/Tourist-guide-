@@ -1,0 +1,109 @@
+﻿<div ng-controller="RestaurantPageController">
+    <div class="col-md-3">
+        <div id="columns">
+            <div class="row">
+                <!--<a href="#/restaurant/{{restaurantId}}/news" class="navbar-brand nameAndAddress">
+
+                </a>-->
+                <div class="navbar-brand nameAndAddress">
+                    <h4 style="overflow:hidden;">{{restaurant.Name}}</h4>
+                    <h5 style="overflow:hidden" class="text-muted">{{restaurant.City}},{{restaurant.Street}},{{restaurant.Number}}</h5>
+                </div>
+                <div ng-show="!checkedModerator() || !checkedAdmin()" style="display:inline-block;margin-top:4px">
+                    <md-switch ng-model="restaurant.IsShowed" aria-label="Switch 1" style="display:block" ng-click="isAvailable()">
+                    </md-switch>
+                    <md-tooltip md-direction="right">
+                        {{isShowedText}}
+                    </md-tooltip>
+                </div>
+            </div>
+        </div>
+        <div ng-controller="AppCtrl">
+            <div class="fake-map" id="columns" ng-click="showMapDialog($event)">
+                <img style="width:100%; height:200px;" src="../../../../../Content/img_map.png">
+                <div class="expandMape">
+                    <span class=" text"> View map</span>
+                </div>
+            </div>
+        </div>
+
+
+        <div id="columns">
+
+            <div ng-controller="RatesController">
+                <uib-rating ng-model="rate" ng-click="SetRestaurantRate(overStar)" max="max" read-only="currentUser.Role != 'User'" on-hover="hoveringOver(value)" on-leave="    overStar = null" aria-labelledby="default-rating">
+                </uib-rating>
+                <span class="label" ng-class="{'label-warning': percent<30, 'label-info': percent>=30 && percent<70, 'label-success': percent>=70}" ng-show="overStar && !isReadonly">{{percent}}%</span>
+                <pre style="margin:20px 0;">Rate: <b>{{rate | number}}</b> - Based on: <i>{{restaurantRates.length}}</i> rates</pre>
+            </div>
+
+            <button ng-show="checkedAdmin()" type="button" class="btn btn-default btn-info" ng-click="addToFavorits()" id="page_buttons"></button>
+
+
+            <button ng-show="checkedAdmin()" type="button" class="btn btn-default btn-info" ng-click="reservate()" id="page_buttons">
+                <span class="glyphicon glyphicon-dashboard" aria-hidden="true"></span> Reservation
+            </button>
+            <div ng-controller="ReservationMenuController">
+                <div style="margin-left:1%;" class="bg-primary reservation-row-item text-center" ng-show="reservation.ReservationId!=undefined">
+                    <h5>
+                        Reservation on {{reservation.ReservationDate}}
+                        <span class="pull-right">
+                            <button ng-show="!reservationEditTimeOut(reservation)" ng-click="editMenu(reservation)" class="glyphicon glyphicon-pencil icon-button-style">
+                                <md-tooltip md-direction="top">
+                                    Click to edit reservation menu
+                                </md-tooltip>
+                            </button>
+                            <button ng-click="isCollapsed = !isCollapsed; loadReservationMenuList(reservation)" class="glyphicon glyphicon-arrow-down icon-button-style">
+                                <md-tooltip md-direction="top">
+                                    Click to watch your dishes
+                                </md-tooltip>
+                            </button>
+                            
+                        </span>
+                    </h5>
+
+                </div>
+
+                <div uib-collapse="isCollapsed" style="margin-left:1%;">
+
+                    <div ng-repeat="menu in reservation.MenuItems" class="list-group">
+
+
+                        <div class="md-list-item-text  list-group-item list-style" layout=" column" style="background-image: url('{{menu.PictureUrl}}');">
+                            <div style="width: 40%">
+                                <h3 class="container-fluid" style="color:black">{{menu.Name }}</h3>
+
+                                <h5 class="container-fluid" style="color:black">Count - {{ menu.Count}}</h5>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    </div>
+
+
+                    </div>
+                </div>
+
+
+    </div>
+
+    <div class="col-md-9 restourantItems">
+        <ul ng-show="checkedAdmin()" ng-controller="TabController" class="nav nav-pills nav-justified profile-type-list" id="navig-tabs">
+            <li ng-class="{active: isActive('/restaurant/{{restaurantId}}/news')}" role="presentation"> <a href="#/restaurant/{{restaurantId}}/news">News</a></li>
+            <li ng-class="{active: isActive('/restaurant/{{restaurantId}}/menu')} " role="presentation"><a href="#/restaurant/{{restaurantId}}/menu">Menu</a></li>
+            <li ng-class="{active: isActive('/restaurant/{{restaurantId}}/photo')} " role="presentation"><a href="#/restaurant/{{restaurantId}}/photo">Photos</a></li>
+            <li ng-class="{active: isActive('/restaurant/{{restaurantId}}/comments')}" role="presentation"><a href="#/restaurant/{{restaurantId}}/comments">Comments</a></li>
+        </ul>
+        <div id="columns1">
+            <div app-view-segment="1"></div>
+        </div>
+    </div>
+
+
+</div>
+
+
+
+
+

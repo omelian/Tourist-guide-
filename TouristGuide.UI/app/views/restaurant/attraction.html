@@ -1,0 +1,64 @@
+﻿<div ng-controller="AttractionPageController">
+        <div class="col-md-3">
+            <div id="columns">
+                <a href="#/attraction/{{attractionId}}/news" class="navbar-brand nameAndAddress">
+                    {{attraction.Name}}({{attraction.City}},{{attraction.Street}},{{attraction.Number}})
+                </a>
+            </div>
+            <div ng-controller="AppCtrl">
+                <div class="fake-map" id="Div1" ng-click ="showMapDialog($event)">
+                    <img style="width:100%; height:200px;" src="../../../../../Content/img_map.png">
+                    <div class="expandMape">
+                        <span class=" text"> View map</span>
+                    </div>
+                </div>
+            </div>          
+            <div id="Div2">
+                <!--<div ng-controller="RatesController">
+                    <uib-rating ng-model="rate" ng-click="addToFavorits()" max="max" read-only="isReadonly" on-hover="hoveringOver(value)" on-leave="overStar = null" titles="['one','two','three']" aria-labelledby="default-rating">
+                    </uib-rating>
+                    <span class="label" ng-class="{'label-warning': percent<30, 'label-info': percent>=30 && percent<70, 'label-success': percent>=70}" ng-show="overStar && !isReadonly">{{percent}}%</span>
+                </div>-->
+                <button ng-show="checkedAdmin()" type="button" class="btn btn-default btn-info" ng-click="addToFavorits()" id="page_buttons">
+                    <span class="glyphicon glyphicon-heart" aria-hidden="true"></span> Add to favorite
+                </button>
+                <button ng-show="checkedAdmin()" type="button" class="btn btn-default btn-info" ng-click="showBoat()" id="page_buttons">
+                    <span class="glyphicon glyphicon-dashboard" aria-hidden="true"></span> Boat tour
+                </button>
+             </div>
+        </div>
+
+    <div ng-show="checkedAdmin()" class="col-md-9 restourantItems">
+        <ul ng-controller="TabController" class="nav nav-pills nav-justified profile-type-list" id="navig-tabs">
+            <li ng-class="{active: isActive('/attraction/{{attractionId}}/news')}" role="presentation"> <a href="#/attraction/{{attractionId}}/news">News</a></li>
+            <li ng-class="{active: isActive('/attraction/{{attractionId}}/photo')} " role="presentation"><a href="#/attraction/{{attractionId}}/photo">Photos</a></li>
+            <li ng-class="{active: isActive('/attraction/{{attractionId}}/comments')}" role="presentation"><a href="#/attraction/{{attractionId}}/comments">Comments</a></li>
+            <li ng-class="{active: isActive('/attraction/{{attractionId}}/information')}" role="presentation"><a href="#/attraction/{{attractionId}}/information">Information</a></li>
+        </ul>
+        <div ng-show="checkedAdmin()" id="columns1">
+            <div app-view-segment="1"></div>
+        </div>
+    </div>
+
+    <div ng-hide="checkedAdmin()">
+    <div ng-controller="ModeratorsController">
+        <div class="col-md-9">            
+            <div class="moderator-content">
+                <div>
+                    <div style="text-align:center;"><h3>Restaurant moderators</h3></div>
+                    <table class="table table-bordered moderatorList">
+                        <tr><th style="text-align:center;">Email</th><th></th></tr>
+                        <tr ng-repeat="moder in restaurantModerators track by (moder.Id + $index)">
+                            <td><div style="margin: auto !important;">{{moder.Email}}</div></td>
+                            <td><button type="button" ng-click="DeleteModerator(moder)" class="btn btn-danger custom  moderatorIconDelete">Delete</button></td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="addModeratorBtn">
+                    <button type="button" class="btn btn-default btn-info" ng-click="showAddModerator($event)">Add new moderator</button>
+                </div>                
+            </div>
+        </div>
+    </div>
+</div>
+</div>

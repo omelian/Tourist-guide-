@@ -1,0 +1,31 @@
+﻿<md-dialog aria-label="Add event item" style ="overflow-x :hidden ;width: 260px;">
+    <form ng-submit="addUserEvent()" role="form">
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2>{{event.Name}}</h2>
+                <span flex></span>
+                <md-button class="md-icon-button" ng-click="cancel()">
+                    <md-icon md-svg-src="/Content/close_pic.svg" aria-label="Close dialog"></md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+
+        <md-dialog-content>
+
+
+            <h4 style="margin-left:5%">
+                Number of tickets  
+                <md-input-container style=" display: inline-block; margin-top: 12%; margin-left: 3%;">
+
+                    <input ng-model="numOfPersons" type="number" step="1" min="1" max="5" required>
+                </md-input-container>
+                </h4style>
+
+                <button type="submit" class="btn btn-default btn-info" style="margin: 0 20px 20px 20px; width:150px">
+                    <span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span> Add
+                </button>
+                </h4>
+
+        </md-dialog-content>
+    </form>
+</md-dialog>

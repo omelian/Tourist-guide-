@@ -1,0 +1,37 @@
+﻿@model TouristGuide.UI.Models.ExternalLoginConfirmationViewModel
+@{
+    ViewBag.Title = "Registration";
+}
+<div style="text-align: center; width: 100%;">
+    <h3>Linking your @ViewBag.LoginProvider account.</h3>
+
+    @using (Html.BeginForm("ExternalLoginConfirmation", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+    {
+        <div class="row center-block" style="margin: 0 auto; width: 100%">
+          
+                <div style="width: 450px; margin-left:auto; margin-right: auto;">
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <p class="text-info">
+                        You have successfully authenticated with <strong>@ViewBag.LoginProvider</strong>,
+                        Enter your Email to continue registration
+                    </p>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
+                        <div class="col-md-10">
+                            @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" class="btn btn-success" value="Registration" />
+                    </div>
+                </div>
+       
+        </div>
+    }
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

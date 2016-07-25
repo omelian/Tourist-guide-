@@ -1,0 +1,127 @@
+﻿@model IEnumerable<TouristGuide.UI.Models.UserViewModel>
+@{
+    Layout = "~/views/superadmin/superadminlayout.cshtml";
+    ViewBag.Title = "Index";
+}
+<ul class="nav nav-pills nav-justified profile-type-list" id="navig-tabs">
+    <li class="active">@Html.ActionLink("Users", "UsersTable")</li>
+    <li>@Html.ActionLink("Profiles", "ProfilesTable")</li>
+    <li>@Html.ActionLink("Requests", "RequestsTable")</li>
+</ul>
+<table id="UsersTable" class="table table-bordered">
+    <thead>
+        <tr class="info">
+            <th>
+                First name
+            </th>
+            <th>
+                Last name
+            </th>
+            <th>
+                Deleted state
+            </th>
+            <th>
+                Banned state
+            </th>
+            <th>
+                Actions with user state
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FirstName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LastName)
+                </td>
+                <td>
+                    @if (item.IsDeleted)
+                    {
+                        <div class="danger-text">Deleted</div>
+                    }
+                    else
+                    {
+                        <div>Not deleted</div>
+                    }
+                </td>
+                <td>
+                    @if (item.IsBanned)
+                    {
+                        <div class="danger-text">Banned</div>
+                    }
+                    else
+                    {
+                        <div>Not banned</div>
+                    }
+                </td>
+                <td>
+                    @if (item.IsBanned)
+                    {
+                        <button type="button" class="btn btn-success custom" data-popup-open="popup-unban" data-user-id="@item.UserId" href="#">Unban</button>
+                    }
+                    else
+                    {
+                        <button type="button" class="btn btn-danger custom" data-popup-open="popup-ban" data-user-id="@item.UserId" href="#">Ban</button>
+                    }
+                    @if (item.IsDeleted)
+                    {
+                        <button type="button" class="btn btn-success custom" data-popup-open="popup-undelete" data-user-id="@item.UserId" href="#">Undelete</button>
+                    }
+                    else
+                    {
+                        <button type="button" class="btn btn-danger custom" data-popup-open="popup-delete" data-user-id="@item.UserId" href="#">Delete</button>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<form id="ban-form">
+    <div class="popup" data-popup="popup-ban">
+        <div class="popup-inner">
+            <h2>Ban reason:</h2>
+            <textarea id="ban-reason" required rows="3" cols="75"></textarea>
+            <p><input type="submit" value="Ban" class="btn btn-danger custom" /></p>
+            <p><a data-popup-close="popup-ban" class="btn btn-warning custom" href="#">Close</a></p>
+            <a class="popup-close" data-popup-close="popup-ban" href="#">x</a>
+        </div>
+    </div>
+</form>
+<form id="unban-form">
+    <div class="popup" data-popup="popup-unban">
+        <div class="popup-inner">
+            <h2>Unban reason:</h2>
+            <textarea id="unban-reason" required rows="3" cols="75"></textarea>
+            <p><input type="submit" value="Unban" class="btn btn-success custom" /></p>
+            <p><a data-popup-close="popup-unban" class="btn btn-warning custom" href="#">Close</a></p>
+            <a class="popup-close" data-popup-close="popup-unban" href="#">x</a>
+        </div>
+    </div>
+</form>
+<form id="delete-form">
+    <div class="popup" data-popup="popup-delete">
+        <div class="popup-inner">
+            <h2>Delete reason:</h2>
+            <textarea id="delete-reason" required rows="3" cols="75"></textarea>
+            <p><input type="submit" value="Delete" class="btn btn-danger custom" /></p>
+            <p><a data-popup-close="popup-delete" class="btn btn-warning custom" href="#">Close</a></p>
+            <a class="popup-close" data-popup-close="popup-delete" href="#">x</a>
+        </div>
+    </div>
+</form>
+<form id="undelete-form">
+    <div class="popup" data-popup="popup-undelete">
+        <div class="popup-inner">
+            <h2>Undelete reason:</h2>
+            <textarea id="undelete-reason" required rows="3" cols="75"></textarea>
+            <p><input type="submit" value="Undelete" class="btn btn-success custom" /></p>
+            <p><a data-popup-close="popup-undelete" class="btn btn-warning custom" href="#">Close</a></p>
+            <a class="popup-close" data-popup-close="popup-undelete" href="#">x</a>
+        </div>
+    </div>
+</form>
+<script src="~/scripts/superadmin/userstable.js"></script>

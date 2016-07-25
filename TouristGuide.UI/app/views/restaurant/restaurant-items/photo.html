@@ -1,0 +1,93 @@
+﻿<div ng-controller="PhotoPageController" class="photo-collage-container">
+
+    <md-progress-circular ng-show="loaderActivated" class="md-progress-circular-style" md-diameter="300px"></md-progress-circular>
+
+    <div ng-show="loaded">
+
+        <button ng-show="!checkedModerator()" data-toggle="collapse" class=" btn btn-primary" ng-disabled="slides.length===0" data-target="#collage">Show / Hide collage</button>
+        <button ng-show="!checkedModerator()" class=" btn btn-primary pull-right" ng-disabled="slides.length===0" ng-click="setAsMainPhoto()">Set as main photo</button>
+
+        <div ng-show="!checkedModerator()" class="photo-server-message" id="serverResponse">{{Message}}</div>
+
+        <div id="collage" class="collapse in" >
+
+
+            <uib-carousel class="div-photo-wrapper-container " active="active" interval="myInterval" no-wrap="noWrapSlides">
+
+
+                <uib-slide ng-repeat="slide in slides track by slide.InnerId" index="slide.InnerId">
+
+
+                    <button id="{{slide.Id}}" ng-show="!checkedModerator()" ng-click="markAsDeleted(slide)" class="div-wrapper-top-center glyphicon glyphicon-remove pull-right icon-photo-button-style"></button>
+
+
+
+                    <div class="carousel-caption">
+
+                        <h4>{{slide.Descripton}}</h4>
+                    </div>
+                    <img ng-src="{{slide.Url}}" class="photo-item-container">
+
+
+                </uib-slide>
+
+
+
+            </uib-carousel>
+
+
+        </div>
+
+
+
+
+
+            <div ng-show="!checkedModerator()" class="controls-top-align">
+
+
+                <div id="dropFileInput" class="upload-drop-zone ">
+                    <md-tooltip md-direction="top">
+                        Drag and drop photos here
+                    </md-tooltip>
+                    <textarea id="description" class="form-control" required name="text" rows="4" placeholder="Type description or drop photos here"></textarea>
+                </div>
+
+
+                <div class="controls-top-align" ng-show="canConfirmDeleting">Selected photos to delete:</div>
+                <div class="content-top-align" ng-repeat="delItem in MarkedItems">
+                    <div class="bg-danger photo-row-item text-center" ng-click="markAsDeleted(delItem.Id)">
+                        {{delItem.Name}}
+                        <md-tooltip md-direction="top">
+                            Click to cancel photo deleting
+                        </md-tooltip>
+                    </div>
+                </div>
+
+
+
+
+                <div class="panel-group content-top-align" ng-repeat="progress in ProgressContainer">
+                    <div class="progress content-top-align">
+                        <div id="{{progress.Id}}" class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="{{progress.ProgressValue}}"
+                             aria-valuemin="0" aria-valuemax="100" style="width:{{progress.ProgressValue}}%">
+                            {{progress.ProgressValue}}% complete of {{progress.ProgressName}}
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+                <label class="content-top-align btn btn-success" ng-disabled="MarkedItems.length!=0">
+                    Add <input ng-disabled="MarkedItems.length!=0" id="fileInput" type="file" accept="image/*" multiple onchange="angular.element(this).scope().addSlide()" style="display: none;">
+                </label>
+
+                <button type="button" class="content-top-align btn btn-danger" ng-disabled="!canConfirmDeleting" ng-click="ConfirmSaveDeleted()">Delete selected</button>
+                <button type="button" class="content-top-align btn btn-primary" ng-disabled="slides.length==0" ng-click="ShowEditPhotosDialog($event)">Edit all</button>
+
+            </div>
+
+
+        </div>
+
+</div>

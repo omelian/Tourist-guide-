@@ -1,0 +1,92 @@
+﻿<div class="col-md-6 col-map" style="position:fixed;">
+    <div ng-controller="MapController" style="height: calc(100% - 70px);" ng-model="choose" ng-load={{callModel();}}>
+        <ng-map zoom-to-include-markers="auto" style="height:100%;">
+            <marker ng-repeat="mark in Coords | toArray | filter:{Name: choose}" icon="{ url: '{{getMarkerIcon(mark)}}',scaledSize:[50,50]}" position="{{mark.Lantitude}},{{mark.Longtitude}}"></marker>
+            <marker position="current" icon="{url:'/Content/current-icon.png',scaledSize:[50,50]}" centered=" true"></marker>
+            <directions ng-if="check()"
+                        draggable="true"
+                        travel-mode={{travelMode}}
+                        origin="current-location"
+                        suppress-markers="true"
+                        destination={{direction}}>
+            </directions>
+        </ng-map>
+    </div>
+</div>
+
+<div class="col-md-6 col-list profile-list" ng-controller="leisureListController">
+    <div class="row list-top">
+        <div class="col-md-10">
+            <input type="text" placeholder="search" class="form-control" ng-model='choose' />
+        </div>
+        <div class="col-md-2">
+            <button type="button" class="btn btn-default btn-info" ng-click="setModel();">
+                <md-tooltip md-direction="top">
+                    Click this button for zoom your map to show only restaurants in list under
+                </md-tooltip>
+                <span class="glyphicon glyphicon-search" aria-hidden="true"></span> Zoom
+            </button>
+        </div>
+    </div>
+    <div id="addProfileButton" style="display:none" class="addRestaurantButton">
+        <button ng-show="!checkedAdmin()" type="button" class="btn btn-default btn-success" ng-click="showProfileDialog(undefined)">Add new profile</button>
+    </div>
+
+    <div style="padding-left:20px">
+        <div dir-paginate="rest in leisure | filter :{Name: choose }| orderBy : 'rest.Name'| itemsPerPage: 6">
+
+
+
+            <div class="profile-list-item-container">
+
+                <a href="#/leisure/{{rest.ProfileId}}/{{returnHref()}}" ng-click="setModelNull();">
+                    <h4 style="height:20px;max-height:20px;overflow:hidden;">{{rest.Name}}</h4>
+                </a>
+                <h6 style="max-height:25px;height:25px;overflow:hidden" class="text-muted">{{rest.Street}}</h6>
+
+                <div ng-show="checkedAdmin()">
+                    <button class="pull-left profile-list-icon-button-style" ng-click="clickTravelMode('Walking',rest.ProfileId)">
+                        <md-icon md-svg-src="../Content/footmode.svg"></md-icon>
+                    </button>
+                    <button class="pull-left profile-list-icon-button-style" ng-click="clickTravelMode('Transit',rest.ProfileId)">
+                        <md-icon md-svg-src="../Content/bus_black_24px.svg"></md-icon>
+                    </button>
+                    <button class="pull-left profile-list-icon-button-style" ng-click="clickTravelMode('Driving',rest.ProfileId)">
+                        <md-icon md-svg-src="../Content/car_black_24px.svg"></md-icon>
+                    </button>
+                </div>
+
+                <button ng-show="!checkedAdmin()" type="button" class="glyphicon glyphicon-remove pull-right icon-button-style" ng-click="DeleteProfile(rest)" style="margin-bottom:10px;"></button>
+                <button ng-show="!checkedAdmin()" type="button" class="glyphicon glyphicon-pencil pull-right icon-button-style" ng-click="showProfileDialog(rest)" style="margin-bottom:10px;"></button>
+
+
+                <a href="#/leisure/{{rest.ProfileId}}/{{returnHref()}}" ng-click="setModelNull();">
+                    <img class="img img-rounded profile-list-photo-container" ng-src="{{rest.MainPhotoUrl}}" />
+                </a>
+
+
+                <div>
+                    <uib-rating ng-model="rest.Rate" ng-click="SetLeisureRateByProfileId(rest.ProfileId,rest,currentUser.Id)" max="10" read-only="currentUser.Role != 'User'" on-hover="hoveringOver(value)" on-leave="    overStar = null" aria-labelledby="default-rating">
+                    </uib-rating>
+                </div>
+
+
+
+                <div id="infobox{{rest.ProfileId}}" style="height:20px;max-height:20px;"></div>
+
+
+            </div>
+
+
+
+        </div>
+        <div style="clear: both;"></div>
+
+        <dir-pagination-controls></dir-pagination-controls>
+
+
+
+    </div>
+
+
+</div>

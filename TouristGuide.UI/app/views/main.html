@@ -1,0 +1,13 @@
+﻿<div ng-controller="MapController" style="height:100%; ">
+    {{resizeMap()}}  
+    <ng-map zoom-to-include-markers="auto" center='current-position' id="map-main" style="height:100% !important">
+        <marker ng-repeat="mark in Coords" position="{{mark.Lantitude}},{{mark.Longtitude}}" icon="{ url: '{{getMarkerIcon(mark)}}',scaledSize:[50,50]}" ></marker>
+        <marker position="current" icon="{url:'/Content/current-icon.png',scaledSize:[50,50]}" centered=" true"></marker>
+    </ng-map>
+</div> 
+
+
+
+
+
+

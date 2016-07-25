@@ -1,0 +1,57 @@
+﻿<div ng-controller="LeisurePageController">
+    <div class="col-md-3">
+        <div id="columns">
+            <div class="row">
+                <!--<a href="#/leisure/{{leisureId}}/news" class="navbar-brand nameAndAddress">
+                </a>-->
+                <div class="navbar-brand nameAndAddress">
+                    <h4 style="overflow:hidden;">{{leisure.Name}}</h4>
+                    <h5 style="overflow:hidden" class="text-muted">{{leisure.City}},{{leisure.Street}},{{leisure.Number}}</h5>
+                </div>
+                <div ng-show="!checkedModerator() || !checkedAdmin()" style="display:inline-block;margin-top:4px">
+                    <md-switch ng-model="leisure.IsShowed" aria-label="Switch 1" style="display:block" ng-click="isAvailable()">
+                    </md-switch>
+                    <md-tooltip md-direction="right">
+                        {{isShowedText}}
+                    </md-tooltip>
+                </div>
+            </div>
+        </div>
+        <div ng-controller="AppCtrl">
+            <div class="fake-map" id="columns" ng-click="showMapDialog($event)">
+                <img style="width:100%; height:200px;" src="../../../../../Content/img_map.png">
+                <div class="expandMape">
+                    <span class=" text"> View map</span>
+                </div>
+            </div>
+        </div>
+        <div id="columns">
+
+            <div ng-controller="RatesController">
+                <uib-rating ng-model="rate" ng-click="SetRestaurantRate(overStar)" max="max" read-only="currentUser.Role != 'User'" on-hover="hoveringOver(value)" on-leave="    overStar = null" aria-labelledby="default-rating">
+                </uib-rating>
+                <span class="label" ng-class="{'label-warning': percent<30, 'label-info': percent>=30 && percent<70, 'label-success': percent>=70}" ng-show="overStar && !isReadonly">{{percent}}%</span>
+                <pre style="margin:20px 0;">Rate: <b>{{rate | number}}</b> - Based on: <i>{{restaurantRates.length}}</i> rates</pre>
+            </div>
+
+            <button ng-show="checkedAdmin()" type="button" class="btn btn-default btn-info" ng-click="addToFavorits()" id="page_buttons"></button>
+        </div>
+    </div>
+
+    <div class="col-md-9 restourantItems">
+        <ul ng-show="checkedAdmin()" ng-controller="TabController" class="nav nav-pills nav-justified profile-type-list" id="navig-tabs">
+            <li ng-class="{active: isActive('/leisure/{{leisureId}}/news')}" role="presentation"> <a href="#/leisure/{{leisureId}}/news">News</a></li>
+            <li ng-class="{active: isActive('/leisure/{{leisureId}}/information')} " role="presentation"><a href="#/leisure/{{leisureId}}/information">Information</a></li>
+            <li ng-class="{active: isActive('/leisure/{{leisureId}}/photo')} " role="presentation"><a href="#/leisure/{{leisureId}}/photo">Photos</a></li>
+            <li ng-class="{active: isActive('/leisure/{{leisureId}}/comments')}" role="presentation"><a href="#/leisure/{{leisureId}}/comments">Comments</a></li>
+        </ul>
+        <div id="columns1">
+            <div app-view-segment="1"></div>
+        </div>
+    </div>
+</div>
+
+
+
+
+

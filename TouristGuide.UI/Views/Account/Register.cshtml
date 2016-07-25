@@ -1,0 +1,182 @@
+﻿@model TouristGuide.INF.DataTransferObject.UserRegisterModel
+@using TouristGuide.INF.Enums
+@{
+    ViewBag.Title = "Registration";
+}
+@Styles.Render("~/Content/Site.css")
+
+<script src="~/Scripts/ScriptsForUser.js"></script>
+
+<h2 align="center">Register new account</h2>
+
+
+@using (Html.BeginForm("Register", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form", name = "myForm" }))
+{
+
+    @Html.AntiForgeryToken()
+    <hr />
+        <div class="row marg bord">
+
+            <div class="row marg bord">
+                <div class="col-xs-6 com-md-0-my bord">
+                </div>
+                <div class="col-xs-6 com-md-2-my bord">                
+                </div>
+                <div class="col-xs-6 com-md-4-my bord">
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger", align = "center", style = " color #1E90FF; " })
+                </div>
+                <div class="col-xs-6 com-md-1-my bord">                  
+                </div>
+            </div>
+
+          
+        </div>
+        <div class="reg bord">
+
+            <div class="row marg bord">
+                <div class="col-xs-6 com-md-0-my bord">
+                </div>
+                <div class="col-xs-6 com-md-2-my bord">
+                    @Html.LabelFor(m => m.UserName, new { @class = "control-label marg", align = "right" })
+                </div>
+                <div class="col-xs-6 com-md-4-my bord">
+                    @Html.TextBoxFor(m => m.UserName, new { @class = "form-control", name = "UserName", title = "First Name of user", })
+                </div>
+                <div class="col-xs-6 com-md-1-my bord">
+                    @Html.ValidationMessageFor(m => m.UserName, "", new { @class = "control-label text-danger marg" })
+                </div>
+            </div>
+
+
+            <div class="row marg ">
+                <div class="col-xs-6 com-md-0-my bord">
+                </div>
+                <div class="col-xs-6 com-md-2-my bord">
+                    @Html.LabelFor(m => m.LastName, new { @class = "control-label marg", style = "  margin: 5px; " })
+                </div>
+                <div class="col-xs-6 com-md-4-my bord">
+                    @Html.TextBoxFor(m => m.LastName, new { @class = "form-control", name = "LastName", title = "First Name of user" })
+                </div>
+                <div class="col-xs-6 com-md-1-my bord">
+                    @Html.ValidationMessageFor(m => m.LastName, "", new { @class = "text-danger marg" })
+                </div>
+            </div>
+
+            <div class="row marg">
+                <div class="col-xs-6 com-md-0-my bord">
+                </div>
+                <div class="col-xs-6 com-md-2-my bord">
+                    @Html.LabelFor(m => m.Email, new { @class = " control-label marg" })
+                </div>
+                <div class="col-xs-6 com-md-4-my bord">
+                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control", name = "Email", title = "Email of user" })
+                </div>
+                <div class="col-xs-6 com-md-1-my bord">
+                    @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger marg" })
+                </div>
+            </div>
+
+
+
+            <div class="row marg">
+                <div class="col-xs-6 com-md-0-my bord">
+                </div>
+                <div class="col-xs-6 com-md-2-my bord">
+                    @Html.LabelFor(m => m.Password, new { @class = " control-label marg" })
+                </div>
+                <div class="col-xs-6 com-md-4-my bord">
+                    @Html.PasswordFor(m => m.Password, new { @class = "form-control", id = "Password" })
+                </div>
+                <div class="col-xs-6 com-md-1-my bord">
+                    @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger marg" })
+                </div>
+            </div>
+
+            <div class="row marg">
+                <div class="col-xs-6 com-md-0-my bord">
+                </div>
+                <div class="col-xs-6 com-md-2-my bord">
+                    @Html.LabelFor(m => m.ConfirmPassword, new { @class = " control-label marg textalign" })
+                </div>
+                <div class="col-xs-6 com-md-4-my bord">
+                    @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control", id = "ConfirmPassword" })
+                </div>
+                <div class="col-xs-6 com-md-1-my bord">
+                    @Html.ValidationMessageFor(m => m.ConfirmPassword, "", new { @class = "text-danger marg" })
+                </div>
+            </div>
+
+            <div class="row marg">
+                <div class="col-xs-6 com-md-0-my bord">
+                </div>
+                <div class="col-xs-6 com-md-2-my bord">
+                    @Html.LabelFor(m => m.Role, new { @class = " control-label marg" })
+                </div>
+                <div class="col-xs-6 com-md-4-my bord " >
+                    @{
+                        var selectList = Enum.GetValues(typeof(UserRoleEnum))
+                                             .Cast<UserRoleEnum>()
+                                             .Where(e => (e != UserRoleEnum.SuperAdmin) && (e != UserRoleEnum.Moderator))
+                                             .Select(e => new SelectListItem
+                                             {
+                                                 Value = ((int)e).ToString(),
+                                                 Text = e.ToString()
+                                             });
+                    }
+                    @Html.DropDownListFor(m => m.Role, selectList, new { @class = "form-control", style = " font-color #3eff34; ", id = "Roles", name = "IdRole", onchange = "roleDropdownChanged(this)" })
+                </div>
+                <img src="http://images.clipartpanda.com/blue-question-mark-icon-Ambox_blue_question.svg" style=" height: 23px; width: 23px; margin-top: 7px; " title="Simple user can use just&#013;standatr functions of site&#013;Admin after confirmation&#013;could add profiles">
+            </div>
+
+
+            @if (Model.Role == UserRoleEnum.Admin)
+            {
+                <div class="row marg" id="admininfo"  style="visibility: visible; ">
+                <div class="col-xs-6 com-md-0-my bord">
+                </div>
+                <div class="col-xs-6 com-md-2-my bord">
+                    @Html.LabelFor(m => m.Company, new { @class = "control-label marg" })
+                </div>
+                <div class="col-xs-6 com-md-4-my bord">
+                    @Html.TextBoxFor(m => m.Company, new { @class = "form-control", id = "network", @Value = "", title = "Name of profile" })
+                </div>
+                <div class="col-xs-6 com-md-1-my bord">
+                    @Html.ValidationMessageFor(m => m.Company, "", new { @class = "text-danger marg" })
+                </div>
+            </div>
+            }
+            else
+            {
+                <div class="row marg" id="admininfo" style="visibility: hidden; ">
+                    <div class="col-xs-6 com-md-0-my bord">
+                    </div>
+                    <div class="col-xs-6 com-md-2-my bord">
+                        @Html.LabelFor(m => m.Company, new { @class = "control-label marg" })
+                    </div>
+                    <div class="col-xs-6 com-md-4-my bord">
+                        @Html.TextBoxFor(m => m.Company, new { @class = "form-control", id = "network", @Value = "_", title = "Name of profile" })
+                    </div>
+                    <div class="col-xs-6 com-md-1-my bord">
+                        @Html.ValidationMessageFor(m => m.Company, "", new { @class = "text-danger marg" })
+                    </div>
+                </div>
+            }
+
+
+
+            <div class="row marg bord">
+                <div class="col-xs-6 com-md-0-my bord">
+                </div>
+                <div class="col-xs-6 com-md-3-my bord "></div>
+                <div class="col-xs-6 com-md-4-my  bord">
+                    <input type="submit" class="btn btn-default btn-info" value="Register" align="center" name="submit" />
+                </div>
+            </div>
+        </div>
+
+                        }
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

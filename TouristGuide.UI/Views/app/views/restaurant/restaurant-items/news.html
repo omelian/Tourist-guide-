@@ -1,0 +1,36 @@
+﻿<br />
+<br />
+<div ng-controller="NewsController">
+    <form ng-hide="checkedModerator()" ng-submit="sendNews()">
+        <textarea class="form-control" id="Title" name="title" rows="1" placeholder="Title" ng-model="news.Title"></textarea>
+        <br />
+        <textarea class="form-control" id="Text" name="text" rows="10" placeholder="Text" ng-model="news.TextContent"></textarea>
+        <br />
+        <button class="btn btn-default" type="submit">Add</button>
+    </form>
+</div>
+
+<br />
+<br />
+
+<div ng-controller="NewsController">
+    <div class="panel-group" dir-paginate="news in restaurantNews | itemsPerPage: 6">
+        <div class=" panel panel-primary">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    {{news.Title}}
+                    <button ng-hide="checkedModerator()" ng-click="deleteNews(news)" class="glyphicon glyphicon-remove  pull-right  "></button>
+                    <button ng-hide="checkedModerator()" ng-click="editNews(news)" class="glyphicon glyphicon-edit pull-right "></button>
+
+                </h4>
+            </div>
+
+            <div class="panel-body center-block">
+                {{news.TextContent}}
+
+            </div>
+        </div>
+        <dir-pagination-controls></dir-pagination-controls>
+    </div>
+</div>
+

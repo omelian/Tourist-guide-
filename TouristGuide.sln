@@ -1,0 +1,51 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TouristGuide.DAL", "TouristGuide.DAL\TouristGuide.DAL.csproj", "{7E41E99F-A14B-46DC-AFA1-44D6F030F315}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TouristGuide.BLL", "TouristGuide.BLL\TouristGuide.BLL.csproj", "{046D4298-FD0A-4BAE-800A-4B6835DDF01A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TouristGuide.INF", "TouristGuide.INF\TouristGuide.INF.csproj", "{F260ECDD-F037-4F70-A278-2B99CA8E7CD7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TouristGuide.UI", "TouristGuide.UI\TouristGuide.UI.csproj", "{0DB16152-415B-457E-BE3A-C41A204EA6B3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TouristGuide.Tests", "TouristGuide.Tests\TouristGuide.Tests.csproj", "{BE75E3FC-93F2-4082-9FEF-563A65043561}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{3FEDE3C8-0DA6-4471-9CCE-A65F9A0636C1}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\NuGet.Config = .nuget\NuGet.Config
+		.nuget\NuGet.exe = .nuget\NuGet.exe
+		.nuget\NuGet.targets = .nuget\NuGet.targets
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7E41E99F-A14B-46DC-AFA1-44D6F030F315}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7E41E99F-A14B-46DC-AFA1-44D6F030F315}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7E41E99F-A14B-46DC-AFA1-44D6F030F315}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7E41E99F-A14B-46DC-AFA1-44D6F030F315}.Release|Any CPU.Build.0 = Release|Any CPU
+		{046D4298-FD0A-4BAE-800A-4B6835DDF01A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{046D4298-FD0A-4BAE-800A-4B6835DDF01A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{046D4298-FD0A-4BAE-800A-4B6835DDF01A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{046D4298-FD0A-4BAE-800A-4B6835DDF01A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F260ECDD-F037-4F70-A278-2B99CA8E7CD7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F260ECDD-F037-4F70-A278-2B99CA8E7CD7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F260ECDD-F037-4F70-A278-2B99CA8E7CD7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F260ECDD-F037-4F70-A278-2B99CA8E7CD7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0DB16152-415B-457E-BE3A-C41A204EA6B3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0DB16152-415B-457E-BE3A-C41A204EA6B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0DB16152-415B-457E-BE3A-C41A204EA6B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0DB16152-415B-457E-BE3A-C41A204EA6B3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BE75E3FC-93F2-4082-9FEF-563A65043561}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BE75E3FC-93F2-4082-9FEF-563A65043561}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BE75E3FC-93F2-4082-9FEF-563A65043561}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BE75E3FC-93F2-4082-9FEF-563A65043561}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

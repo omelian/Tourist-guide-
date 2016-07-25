@@ -1,0 +1,56 @@
+﻿<select class="form-control">
+    <option>Напої</option>
+    <option>Гарячі страви</option>
+    <option>Закуска</option>
+</select>
+<br />
+<br /><br />
+
+<div class="row" ng-controller="MenuController">
+    <div dir-paginate="menu in menus| itemsPerPage: 9">
+        <div class="col-md-4" style="float:left; margin-bottom:20px;"ng-click='toggleModal(menu.Name,menu.Price,menu.PictureUrl,menu.Description)'>
+
+            <div class="hovereffect thumbnail">
+                <div class="carousel-caption">
+                    <h2 style="margin-top: -100px; color: #000000">{{menu.Name}}</h2>
+                </div>
+                <img src={{menu.PictureUrl}} class="img-responsive" style="width:100%;height:200px;"/>
+                <div class="overlay">
+                    <p>{{menu.Description}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <modal-dialog show='modalShown' width='550px' height='100%'>
+        <div class="container">
+
+            <div class="row">
+                <img src={{pictureUrlById}} class="img-responsive imgBorder" style="width:550px;height:300px;"/>
+            </div>
+                <div style="width:500px;">
+                    <h1>{{nameById}}</h1>
+                </div>
+
+            <div class="dialogText">
+                <h2 style="display:inline-block;"><b>Price:</b> {{priceById}}</h2>
+            </div>
+            <div class="dialogText"> 
+            <h2><b>Description:</b> {{descriptionById}}</h2>
+            </div>
+        </div>
+</div>
+<div class="row">
+    <div align="center">
+        <dir-pagination-controls></dir-pagination-controls>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+

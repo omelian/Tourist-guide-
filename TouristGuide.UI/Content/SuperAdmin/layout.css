@@ -1,0 +1,29 @@
+﻿  li.next a {
+        color: #ffffff;
+    }
+    .custom{
+        width: 120px;
+    }
+    .nav-tabs{
+  background-color: #333333 !important;
+}
+.tab-content{
+    background-color: #333333 !important;
+    color:#fff;
+    padding:5px
+}
+.nav-pills > li > a{
+  border: medium ;
+}
+.nav-tabs > li > a:hover{
+  background-color: #303136 !important;
+    border: medium none;
+    border-radius: 0;
+    color:#fff;
+}
+div.danger-text{
+    color:#ff0000;
+}
+div.success-text{
+    color:#1d752a;
+}

@@ -1,0 +1,80 @@
+﻿@model IEnumerable<TouristGuide.UI.Models.ProfileViewModel>
+@{
+    Layout = "~/views/superadmin/superadminlayout.cshtml";
+    ViewBag.Title = "Index";
+}
+<ul class="nav nav-pills nav-justified profile-type-list" id="navig-tabs">
+    <li>@Html.ActionLink("Users", "UsersTable")</li>
+    <li class="active">@Html.ActionLink("Profiles", "ProfilesTable")</li>
+    <li>@Html.ActionLink("Requests", "RequestsTable")</li>
+</ul>
+<table id="ProfilesTable" class="table table-bordered">
+    <thead>
+        <tr class="info">
+            <th>
+                Name
+            </th>
+            <th>
+                Banned state
+            </th>
+            <th>
+                Actions with profile state
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @if (item.IsBanned)
+                    {
+                        <div class="danger-text">Banned</div>
+                    }
+                    else
+                    {
+                        <div>Not banned</div>
+                    }
+                </td>
+                <td>
+                    @if (item.IsBanned)
+                    {
+                        <button type="button" class="btn btn-success custom" data-popup-open="popup-unban" data-profile-id="@item.ProfileId" href="#">Unban</button>
+                    }
+                    else
+                    {
+                        <button type="button" class="btn btn-danger custom" data-popup-open="popup-ban" data-profile-id="@item.ProfileId" href="#">Ban</button>
+                    }
+                </td>
+            </tr>
+        }
+
+    </tbody>
+
+</table>
+<form id="unban-form">
+    <div class="popup" data-popup="popup-unban">
+        <div class="popup-inner">
+            <h2>Unban reason:</h2>
+            <textarea id="unban-reason" required rows="3" cols="75"></textarea>
+            <p><input type="submit" value="Unban" class="btn btn-success custom" /></p>
+            <p><a data-popup-close="popup-unban" class="btn btn-warning custom" href="#">Close</a></p>
+            <a class="popup-close" data-popup-close="popup-unban" href="#">x</a>
+        </div>
+    </div>
+</form>
+<form id="ban-form">
+    <div class="popup" data-popup="popup-ban">
+        <div class="popup-inner">
+            <h2>Ban reason:</h2>
+            <p><textarea id="ban-reason" required rows="3" cols="75"></textarea></p>
+            <p><input type="submit" value="Ban" class="btn btn-danger custom"></p>
+            <p><a data-popup-close="popup-ban" class="btn btn-warning custom" href="#">Close</a></p>
+            <a class="popup-close" data-popup-close="popup-ban" href="#">x</a>
+        </div>
+    </div>
+</form>
+<script src="~/scripts/superadmin/profilestable.js"></script>

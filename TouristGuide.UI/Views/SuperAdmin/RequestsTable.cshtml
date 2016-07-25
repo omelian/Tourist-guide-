@@ -1,0 +1,97 @@
+﻿@model IEnumerable<TouristGuide.UI.Models.AdminRequestsViewModel>
+@using TouristGuide.INF.Enums
+@{
+    Layout = "~/views/superadmin/superadminlayout.cshtml";
+    ViewBag.Title = "Index";
+}
+<ul class="nav nav-pills nav-justified profile-type-list" id="navig-tabs">  
+    <li>@Html.ActionLink("Users", "UsersTable")</li>
+    <li>@Html.ActionLink("Profiles", "ProfilesTable")</li>
+    <li class="active">@Html.ActionLink("Requests", "RequestsTable")</li>
+</ul>
+<table id="RequestsTable" class="table table-bordered">
+    <thead>
+        <tr class="info">
+            <th>
+                Admin name
+            </th>
+            <th>
+                Admin company name
+            </th>
+            <th>
+                Request state
+            </th>
+            <th>
+                Actions
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AdminName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CompanyName)
+                </td>
+                <td>
+                    @if (item.RequestState == RequestStateEnum.InProcess.ToString())
+                    {
+                        <div>In process</div>
+                    }
+                    else
+                    if(item.RequestState == RequestStateEnum.Rejected.ToString())
+                    {
+                        <div class="danger-text">Rejected</div>
+                    }
+                    else
+                    {
+                        <div class="success-text">Approved</div>
+                    }
+                </td>
+                <td>
+                    @if(item.RequestState == RequestStateEnum.Approved.ToString())
+                    { 
+                        <button type="button" disabled class="btn btn-success custom" data-popup-open="popup-approve" data-admin-id="@item.AdminId" href="#">Approve</button>
+                        <button type="button" class="btn btn-danger custom" data-popup-open="popup-reject" data-admin-id="@item.AdminId" href="#">Reject</button>
+                    }
+                    else
+                    if(item.RequestState == RequestStateEnum.Rejected.ToString())
+                    {
+                        <button type="button" class="btn btn-success custom" data-popup-open="popup-approve" data-admin-id="@item.AdminId" href="#">Approve</button>
+                        <button type="button" disabled class="btn btn-danger custom" data-popup-open="popup-reject" data-admin-id="@item.AdminId" href="#">Reject</button>
+                    }
+                    else
+                    {
+                        <button type="button" class="btn btn-success custom" data-popup-open="popup-approve" data-admin-id="@item.AdminId" href="#">Approve</button>
+                        <button type="button" class="btn btn-danger custom" data-popup-open="popup-reject" data-admin-id="@item.AdminId" href="#">Reject</button>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<form id="reject-form">
+<div class="popup" data-popup="popup-reject">
+    <div class="popup-inner">
+        <h2>Reqest rejection reason:</h2>
+        <textarea id="reject-reason" required rows="3" cols="75"></textarea>
+        <p><input type="submit" value="Reject" class="btn btn-success custom"/></p>
+        <p><a data-popup-close="popup-reject" class="btn btn-warning custom" href="#">Close</a></p>
+        <a class="popup-close" data-popup-close="popup-reject" href="#">x</a>
+    </div>
+</div>
+</form>
+<form id="approve-form">
+<div class="popup" data-popup="popup-approve">
+    <div class="popup-inner">
+        <h2>Are you sure that you want to approve this request?</h2>
+        <p><input type="submit" value="Approve" class="btn btn-success custom"/></p>
+        <p><a data-popup-close="popup-approve" class=" btn btn-warning custom" href="#">Close</a></p>
+        <a class="popup-close" data-popup-close="popup-approve" href="#">x</a>
+    </div>
+</div>
+</form>
+<script src="~/scripts/superadmin/requeststable.js"></script>
